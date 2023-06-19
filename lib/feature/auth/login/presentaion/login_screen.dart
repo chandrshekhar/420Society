@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:four20society/constants/colors/app_colors.dart';
 import 'package:four20society/constants/routes/routes_name.dart';
+import 'package:four20society/global_widget/bottom_nav.dart';
 import 'package:four20society/global_widget/custom_button.dart';
 import 'package:four20society/global_widget/input_fields.dart';
 
@@ -21,7 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
         SizedBox(
             height: MediaQuery.of(context).size.height,
             child: Image.network("https://wallpapercave.com/wp/wp2490640.jpg",
-                fit: BoxFit.cover)),
+                fit: BoxFit.cover)
+                ),
         Positioned(
             bottom: 0,
             child: Container(
@@ -62,7 +64,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height:90),
                   CustomElevatedButton(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomePageWithBottomBar()));
+                    },
                     title: "LOGIN",
                     color: AppColors.buttonColor,
                   ),

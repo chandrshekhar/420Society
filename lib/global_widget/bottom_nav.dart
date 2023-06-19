@@ -1,12 +1,11 @@
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:four20society/constants/colors/app_colors.dart';
-import 'package:four20society/feature/cart/presentation/cart.dart';
-import 'package:four20society/feature/category/presentaion/category_screen.dart';
-import 'package:four20society/feature/dashboard/presentation/dashboard.dart';
-import 'package:four20society/feature/profile/presentaion/user_profile_screen.dart';
-import 'package:four20society/feature/wish_list/presentation/wish_list_screen.dart';
+import 'package:four20society/feature/cart/presentation/cart_page.dart';
+import 'package:four20society/feature/category/presentaion/category.dart';
+import 'package:four20society/feature/dashboard/presentation/dashboards.dart';
+import 'package:four20society/feature/profile/presentaion/profile.dart';
+import 'package:four20society/feature/wish_list/presentation/wishlist_page.dart';
 class HomePageWithBottomBar extends StatefulWidget {
   const HomePageWithBottomBar({Key? key}) : super(key: key);
 
@@ -21,7 +20,7 @@ class _HomePageWithBottomBarState extends State<HomePageWithBottomBar> {
     const DashboardScreen(),
     const ProductCategoryScreen(),
     const CardScreen(),
-    const ProductWishList(),
+    const ProductWishListScreen(),
     const UserProfileScreen(),
  
   ];
