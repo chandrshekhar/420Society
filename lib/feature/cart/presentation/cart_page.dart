@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:four20society/feature/checkout/presentation/check_out_screen.dart';
 import 'package:four20society/global_widget/app_drawar.dart';
 import 'package:four20society/global_widget/custom_product_cart_widget.dart';
 
@@ -13,9 +14,9 @@ class _CardScreenState extends State<CardScreen> {
    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    final _screenHeight = MediaQuery.of(context).size.height -
-        kToolbarHeight -
-        MediaQuery.of(context).padding.top;
+    // final screenHeight = MediaQuery.of(context).size.height -
+    //     kToolbarHeight -
+    //     MediaQuery.of(context).padding.top;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -61,15 +62,15 @@ class _CardScreenState extends State<CardScreen> {
             ),
           ),
       
-          Row(
+         const Row(
             children: <Widget>[
-              Container(child: Text("Discount")),
+              Text("Discount"),
               Spacer(),
-              Container(child: Text(r'-$' + '50')),
+              Text(r'-$' + '50'),
             ],
           ),
          const SizedBox(height: 5),
-          Row(
+       const   Row(
             children: <Widget>[
               Text("Price (1 item)"),
               Spacer(),
@@ -77,7 +78,7 @@ class _CardScreenState extends State<CardScreen> {
             ],
           ),
            const SizedBox(height: 5),
-          Row(
+       const   Row(
             children: <Widget>[
               Text("Discount"),
               Spacer(),
@@ -85,7 +86,7 @@ class _CardScreenState extends State<CardScreen> {
             ],
           ),
            const SizedBox(height: 5),
-          Row(
+       const   Row(
             children: <Widget>[
               Text("Delivery Charges"),
               Spacer(),
@@ -94,11 +95,11 @@ class _CardScreenState extends State<CardScreen> {
           ),
       
       
-          Divider(
+       const   Divider(
             color: Colors.black,
           ),
            const SizedBox(height: 5),
-          Row(
+        const  Row(
             children: <Widget>[
               Text("Total Amount",
                   style: TextStyle(fontWeight: FontWeight.bold)),
@@ -108,7 +109,7 @@ class _CardScreenState extends State<CardScreen> {
             ],
           ),
         
-          Text("You will save 50 on this order",
+        const  Text("You will save 50 on this order",
               style: TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.green)),
            const SizedBox(height: 5),
@@ -131,16 +132,18 @@ class _CardScreenState extends State<CardScreen> {
                       textDirection: TextDirection.rtl,
                       child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
-                                primary: Color(0xFF00C8B8),
+                                primary:const Color(0xFF00C8B8),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                               ),
-                        onPressed: () {},
-                        icon: Icon(
+                        onPressed: () {
+                          Navigator.push(context,MaterialPageRoute(builder: (context)=>const CheckoutPage()));
+                        },
+                        icon: const Icon(
                           Icons.arrow_back_ios,color: Colors.white,size: 16,
                         ),
-                        label: Text("Checkout", style: TextStyle(
+                        label: const Text("Checkout", style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.w600,

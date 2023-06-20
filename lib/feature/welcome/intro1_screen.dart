@@ -11,13 +11,11 @@ class IntroOneScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
+          fit: StackFit.loose,
       children: [
-        Image.network(
-          "https://wallpapercave.com/wp/wp2490640.jpg",
+        Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          fit: BoxFit.cover,
-        ),
+          child: Image.asset("assets/images/intro1.png",fit: BoxFit.fill)),
         Positioned(
             top: 80,
             left: MediaQuery.of(context).size.width * 0.2,
@@ -50,7 +48,7 @@ class IntroOneScreen extends StatelessWidget {
               color: AppColors.buttonColor,
               onTap: () {
                   Navigator.pushNamedAndRemoveUntil(
-                  context, AppRoute.intro2Screen, (route) => false);
+                  context, AppRoute.loginScreen, (route) => false);
               },
               title: "NEXT    >",
               width: 240,

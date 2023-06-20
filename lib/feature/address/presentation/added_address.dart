@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class PaymentMethod extends StatefulWidget {
-  const PaymentMethod({super.key});
+class AddedAddress extends StatefulWidget {
+  const AddedAddress({super.key});
 
   @override
-  State<PaymentMethod> createState() => _PaymentMethod();
+  State<AddedAddress> createState() => _AddedAddress();
 }
 
-class _PaymentMethod extends State<PaymentMethod> {
+class _AddedAddress extends State<AddedAddress> {
   @override
   Widget build(BuildContext context) {
     final _screenHeight = MediaQuery.of(context).size.height -
@@ -20,11 +20,13 @@ class _PaymentMethod extends State<PaymentMethod> {
         elevation: 0,
         backgroundColor: Colors.white,
         title: const Text(
-          "Payment Method",
+          "Saved Address",
           style: TextStyle(color: Colors.black),
         ),
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: const Icon(
             Icons.arrow_back,
             color: Colors.black,
@@ -46,7 +48,7 @@ class _PaymentMethod extends State<PaymentMethod> {
                 borderRadius: BorderRadius.circular(8),
               ),
               width: MediaQuery.of(context).size.width * 0.8,
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -69,7 +71,7 @@ class _PaymentMethod extends State<PaymentMethod> {
                       ),
                     ],
                   ),
-                  const SizedBox(
+                   SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -79,7 +81,7 @@ class _PaymentMethod extends State<PaymentMethod> {
                         fontWeight: FontWeight.normal,
                         color: Colors.black),
                   ),
-                  const SizedBox(
+                   SizedBox(
                     height: 7,
                   ),
                   Text(
@@ -89,7 +91,7 @@ class _PaymentMethod extends State<PaymentMethod> {
                         fontWeight: FontWeight.normal,
                         color: Colors.black),
                   ),
-                  const SizedBox(
+                   SizedBox(
                     height: 7,
                   ),
                   Text(
@@ -119,11 +121,11 @@ class _PaymentMethod extends State<PaymentMethod> {
                         child: Container(
                           width: 50,
                           height: 50,
-                          decoration: BoxDecoration(
+                          decoration:const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Color(0xff00C8B8),
                           ),
-                          child: Icon(
+                          child:const Icon(
                             Icons.edit,
                             color: Colors.white,
                             size: 14,
@@ -135,11 +137,11 @@ class _PaymentMethod extends State<PaymentMethod> {
                         child: Container(
                           width: 50,
                           height: 50,
-                          decoration: BoxDecoration(
+                          decoration:const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Color(0xffE84F5B),
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.delete,
                             color: Colors.white,
                             size: 14,
@@ -168,7 +170,7 @@ class _PaymentMethod extends State<PaymentMethod> {
                 borderRadius: BorderRadius.circular(8),
               ),
               width: MediaQuery.of(context).size.width * 0.8,
-              child: Column(
+              child:const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -191,7 +193,7 @@ class _PaymentMethod extends State<PaymentMethod> {
                       ),
                     ],
                   ),
-                  const SizedBox(
+                   SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -201,7 +203,7 @@ class _PaymentMethod extends State<PaymentMethod> {
                         fontWeight: FontWeight.normal,
                         color: Colors.black),
                   ),
-                  const SizedBox(
+                   SizedBox(
                     height: 7,
                   ),
                   Text(
@@ -211,7 +213,7 @@ class _PaymentMethod extends State<PaymentMethod> {
                         fontWeight: FontWeight.normal,
                         color: Colors.black),
                   ),
-                  const SizedBox(
+                   SizedBox(
                     height: 7,
                   ),
                   Text(
@@ -241,11 +243,11 @@ class _PaymentMethod extends State<PaymentMethod> {
                         child: Container(
                           width: 50,
                           height: 50,
-                          decoration: BoxDecoration(
+                          decoration:const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Color(0xff00C8B8),
                           ),
-                          child: Icon(
+                          child:const Icon(
                             Icons.edit,
                             color: Colors.white,
                             size: 14,
@@ -257,11 +259,11 @@ class _PaymentMethod extends State<PaymentMethod> {
                         child: Container(
                           width: 50,
                           height: 50,
-                          decoration: BoxDecoration(
+                          decoration:const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Color(0xffE84F5B),
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.delete,
                             color: Colors.white,
                             size: 14,
@@ -290,7 +292,7 @@ class _PaymentMethod extends State<PaymentMethod> {
                 borderRadius: BorderRadius.circular(8),
               ),
               width: MediaQuery.of(context).size.width * 0.8,
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -313,7 +315,7 @@ class _PaymentMethod extends State<PaymentMethod> {
                       ),
                     ],
                   ),
-                  const SizedBox(
+                   SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -323,7 +325,7 @@ class _PaymentMethod extends State<PaymentMethod> {
                         fontWeight: FontWeight.normal,
                         color: Colors.black),
                   ),
-                  const SizedBox(
+                   SizedBox(
                     height: 7,
                   ),
                   Text(
@@ -333,7 +335,7 @@ class _PaymentMethod extends State<PaymentMethod> {
                         fontWeight: FontWeight.normal,
                         color: Colors.black),
                   ),
-                  const SizedBox(
+                   SizedBox(
                     height: 7,
                   ),
                   Text(
@@ -363,11 +365,11 @@ class _PaymentMethod extends State<PaymentMethod> {
                         child: Container(
                           width: 50,
                           height: 50,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Color(0xff00C8B8),
                           ),
-                          child: Icon(
+                          child:const Icon(
                             Icons.edit,
                             color: Colors.white,
                             size: 14,
@@ -379,11 +381,11 @@ class _PaymentMethod extends State<PaymentMethod> {
                         child: Container(
                           width: 50,
                           height: 50,
-                          decoration: BoxDecoration(
+                          decoration:const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Color(0xffE84F5B),
                           ),
-                          child: Icon(
+                          child:const Icon(
                             Icons.delete,
                             color: Colors.white,
                             size: 14,

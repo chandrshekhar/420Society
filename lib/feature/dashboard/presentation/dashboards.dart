@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:four20society/feature/notification/presentation/notification_screen.dart';
 import 'package:four20society/global_widget/app_drawar.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -62,8 +63,8 @@ class _DashboardScreen extends State<DashboardScreen> {
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.85,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
+                child: const Padding(
+                  padding:  EdgeInsets.symmetric(
                       horizontal: 10.0, vertical: 20.0),
                 ),
               ),
@@ -71,9 +72,11 @@ class _DashboardScreen extends State<DashboardScreen> {
                 width: MediaQuery.of(context).size.width * 0.15,
                 child: IconButton(
                   icon: const Icon(
-                    Icons.notifications_active_outlined,
+                    Icons.notification_important_outlined,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,MaterialPageRoute(builder: (context)=>const NotificationScreen()));
+                  },
                 ),
               ),
             ],

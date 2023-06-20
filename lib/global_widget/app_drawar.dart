@@ -1,25 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:four20society/feature/about_us/presentation/about_us.dart';
+import 'package:four20society/feature/address/presentation/added_address.dart';
 import 'package:four20society/feature/help_support/presentation/termcondition.dart';
-import 'package:four20society/feature/track_order/presentation/track_order.dart';
-// class AppDrawar extends StatelessWidget {
-//   const AppDrawar({Key? key}) : super(key: key);
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Drawer(
-//       backgroundColor:  Color(0XFF24ae60),
-//       child: SafeArea(
-//           child: SingleChildScrollView(
+import 'package:four20society/feature/notification/presentation/notification_screen.dart';
 
-//          child: customDrawer(context: context),
-//       )),
-//     );
-//   }
+import 'package:four20society/feature/track_order/presentation/track_order.dart';
+
 Widget customDrawer({required context}) {
-  final _mediaQuery = MediaQuery.of(context);
+  final mediaQuery = MediaQuery.of(context);
   return Container(
     // padding: EdgeInsets.only(top: _mediaQuery.viewPadding.top),
-    width: _mediaQuery.size.width * 0.75,
+    width: mediaQuery.size.width * 0.75,
     decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(topRight: Radius.circular(90))),
@@ -27,8 +18,8 @@ Widget customDrawer({required context}) {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
-          padding: EdgeInsets.all(16),
-          height: _mediaQuery.size.height * 0.24,
+          padding: const EdgeInsets.all(16),
+          height: mediaQuery.size.height * 0.24,
           decoration: const BoxDecoration(
               color: Color(0XFF00C8B8),
               borderRadius: BorderRadius.only(topRight: Radius.circular(90))),
@@ -36,11 +27,11 @@ Widget customDrawer({required context}) {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundImage: AssetImage('assets/img/profile.png'),
                   radius: 40,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 RichText(
@@ -78,7 +69,7 @@ Widget customDrawer({required context}) {
                 padding: const EdgeInsets.only(top: 0, left: 10),
                 child: Text(
                   "your information".toUpperCase(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
                   ),
@@ -92,8 +83,8 @@ Widget customDrawer({required context}) {
                     margin: const EdgeInsets.only(bottom: 10, top: 10),
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color:
-                          Color.fromARGB(255, 211, 209, 209).withOpacity(0.4),
+                      color: const Color.fromARGB(255, 211, 209, 209)
+                          .withOpacity(0.4),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     width: MediaQuery.of(context).size.width * 0.9,
@@ -103,7 +94,11 @@ Widget customDrawer({required context}) {
                       children: [
                         ListTile(
                           onTap: () {
-                            Navigator.push(context,MaterialPageRoute(builder: (_)=>const TrackOrderPage()));
+                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const TrackOrderPage()));
                           },
                           title: const Text(
                             "Track Your Order",
@@ -115,11 +110,12 @@ Widget customDrawer({required context}) {
                         ),
                         ListTile(
                           onTap: () {
-                                         Navigator.pop(context);
+                            Navigator.pop(context);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => TermConditionPage()));
+                                    builder: (context) =>
+                                        const TermConditionPage()));
                           },
                           title: const Text(
                             "Help Support",
@@ -130,7 +126,14 @@ Widget customDrawer({required context}) {
                           ),
                         ),
                         ListTile(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AddedAddress()));
+                          },
                           title: const Text(
                             "Address",
                             style: TextStyle(
@@ -140,7 +143,10 @@ Widget customDrawer({required context}) {
                           ),
                         ),
                         ListTile(
-                          onTap: () {},
+                          onTap: () {
+                            // Navigator.pop(context);
+                            // Navigator.push(context, MaterialPageRoute(builder: (context)=>const PaymentCard()));
+                          },
                           title: const Text(
                             "Payment Method",
                             style: TextStyle(
@@ -159,7 +165,7 @@ Widget customDrawer({required context}) {
                 padding: const EdgeInsets.only(top: 0, left: 10),
                 child: Text(
                   "Other information".toUpperCase(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
                   ),
@@ -173,8 +179,8 @@ Widget customDrawer({required context}) {
                     margin: const EdgeInsets.only(bottom: 10, top: 10),
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color:
-                          Color.fromARGB(255, 211, 209, 209).withOpacity(0.4),
+                      color: const Color.fromARGB(255, 211, 209, 209)
+                          .withOpacity(0.4),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     width: MediaQuery.of(context).size.width * 0.9,
@@ -188,7 +194,7 @@ Widget customDrawer({required context}) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => AboutUsPage()));
+                                    builder: (context) => const AboutUsPage()));
                           },
                           title: const Text(
                             "Share The App",
@@ -199,7 +205,13 @@ Widget customDrawer({required context}) {
                           ),
                         ),
                         ListTile(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const AboutUsPage()));
+                          },
                           title: const Text(
                             "About Us",
                             style: TextStyle(
@@ -219,7 +231,13 @@ Widget customDrawer({required context}) {
                           ),
                         ),
                         ListTile(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const NotificationScreen()));
+                          },
                           title: const Text(
                             "Notification Preferences",
                             style: TextStyle(

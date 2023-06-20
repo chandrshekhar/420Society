@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:four20society/feature/change_password/presentation/change_password%20(1).dart';
+import 'package:four20society/feature/notification/presentation/notification_screen.dart';
+import 'package:four20society/feature/profile/presentaion/personalDetails.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
@@ -23,22 +26,19 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           "Profile Screen",
           style: TextStyle(color: Colors.black),
         ),
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (_)=>const NotificationScreen()));
+            },
             icon: const Icon(
               Icons.notification_important_outlined,
               color: Colors.black54,
             ),
           ),
         ],
-        leading: GestureDetector(
-          onTap: () {},
-          child: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-        ),
+     
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -148,7 +148,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context,MaterialPageRoute(builder: (context)=>const PersonalDetails()));
+                    },
                     title: const Text(
                       "Personal Details",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -160,7 +162,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const ChangePasswordScreen1()));
+                    },
                     title: const Text(
                       "Privacy",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),

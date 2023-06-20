@@ -24,7 +24,9 @@ class _AboutUsPage extends State<AboutUsPage> {
           style: TextStyle(color: Colors.black),
         ),
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: const Icon(
             Icons.arrow_back,
             color: Colors.black,
