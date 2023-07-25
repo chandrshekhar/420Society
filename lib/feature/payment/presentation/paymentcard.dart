@@ -10,6 +10,8 @@ class PaymentCard extends StatefulWidget {
 }
 
 class _PaymentCard extends State<PaymentCard> {
+  get value => null;
+
   @override
   Widget build(BuildContext context) {
     final _screenHeight = MediaQuery.of(context).size.height -
@@ -22,13 +24,6 @@ class _PaymentCard extends State<PaymentCard> {
         title: const Text(
           "Payment Method",
           style: TextStyle(color: Colors.black),
-        ),
-        leading: GestureDetector(
-          onTap: () {},
-          child: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
         ),
       ),
       body: Column(children: [
@@ -51,22 +46,22 @@ class _PaymentCard extends State<PaymentCard> {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        "ICICI Bank Credit card",
+                      const Text(
+                        "ICIC Bank Credit card",
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: Colors.black),
                       ),
-                      Spacer(),
-                      Image.asset('assets/img/logo.png',
+                      const Spacer(),
+                      Image.asset('assets/images/bank_logo.png',
                           width: 30, height: 30, fit: BoxFit.fill),
                     ],
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     "**** **** **** 1234",
                     style: TextStyle(
                         fontSize: 14,
@@ -76,7 +71,7 @@ class _PaymentCard extends State<PaymentCard> {
                   const SizedBox(
                     height: 7,
                   ),
-                  Text(
+                  const Text(
                     "No cost  EMI at \$15/ month",
                     style: TextStyle(
                         fontSize: 10,
@@ -88,7 +83,7 @@ class _PaymentCard extends State<PaymentCard> {
                   ),
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         "cvv",
                         style: TextStyle(
                             fontSize: 14,
@@ -96,7 +91,7 @@ class _PaymentCard extends State<PaymentCard> {
                             fontWeight: FontWeight.w300,
                             color: Colors.grey),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       InkWell(
@@ -104,11 +99,11 @@ class _PaymentCard extends State<PaymentCard> {
                         child: Container(
                           width: 12,
                           height: 12,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.grey,
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.question_mark,
                             color: Colors.white,
                             size: 12,
@@ -120,8 +115,8 @@ class _PaymentCard extends State<PaymentCard> {
                 ],
               ),
             ),
-            Padding(
-                padding: const EdgeInsets.only(
+            const Padding(
+                padding: EdgeInsets.only(
               top: 10,
             )),
             Container(
@@ -144,36 +139,51 @@ class _PaymentCard extends State<PaymentCard> {
                         margin: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            InkWell(
-                              onTap: () {},
-                              child: Container(
-                                width: 20,
-                                height: 20,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color(0xff00C8B8),
-                                ),
-                                child: Icon(
-                                  Icons.circle,
-                                  color: Colors.white,
-                                  size: 18,
-                                ),
-                              ),
+                            Radio(
+                              fillColor: MaterialStateColor.resolveWith((states) => Colors.red),
+                              focusColor: MaterialStateColor.resolveWith((states) => Colors.green),
+                              value: 1,
+                              groupValue: null,
+                              onChanged: (value) {
+
+
+                                // setState(() {
+                                //   value = value;
+                                //
+                                //   // _radioValue = value as int;
+                                // });
+                              },
                             ),
+                         // InkWell(
+                            //   onTap: () {},
+                            //   child: Container(
+                            //     width: 20,
+                            //     height: 20,
+                            //     decoration: const BoxDecoration(
+                            //       shape: BoxShape.circle,
+                            //       color: Color(0xff00C8B8),
+                            //     ),
+                            //     child: const Icon(
+                            //       Icons.circle,
+                            //       color: Colors.white,
+                            //       size: 18,
+                            //     ),
+                            //   ),
+                            // ),
                             const SizedBox(
                               width: 50,
                             ),
                             Row(children: [
                               Image.asset(
-                                'assets/img/credit 1.png',
+                                'assets/images/credit_logo.png',
                                 height: 50,
                                 width: 50,
                               ),
                               const SizedBox(
                                 width: 15,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
+                              const Padding(
+                                padding: EdgeInsets.only(top: 10),
                                 child: Text(
                                   "Net Banking",
                                   style: TextStyle(
@@ -191,7 +201,7 @@ class _PaymentCard extends State<PaymentCard> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
@@ -213,36 +223,69 @@ class _PaymentCard extends State<PaymentCard> {
                         margin: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            InkWell(
-                              onTap: () {},
-                              child: Container(
-                                width: 20,
-                                height: 20,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color(0xff00C8B8),
-                                ),
-                                child: Icon(
-                                  Icons.circle,
-                                  color: Colors.white,
-                                  size: 18,
-                                ),
-                              ),
+
+                            Radio(
+                              fillColor: MaterialStateColor.resolveWith((states) => const Color(0xff00C8B8)),
+                              focusColor: MaterialStateColor.resolveWith((states) => Colors.green),
+
+                              // fillColor: MaterialStateProperty.all(Colors.red),
+                              // groupValue: null,
+                              // onChanged: (v) => setState(() => null),
+                              // onChanged: (value) {
+                              //   setState(() {
+                              //     // _radioValue = value as int;
+                              //   });
+                              // },
+                              value: 0,
+                              groupValue: value,
+                               onChanged: (v) => setState(() => _PaymentCard() ),
                             ),
+
+
+                            // InkWell(
+                            //   onTap: () {},
+                            //   child: Container(
+                            //     width: 20,
+                            //     height: 20,
+                            //     decoration: const BoxDecoration(
+                            //       shape: BoxShape.circle,
+                            //       color: Color(0xff00C8B8),
+                            //     ),
+                            //     // child: const Icon(
+                            //     //   Icons.circle,
+                            //     //   color: Colors.white,
+                            //     //   size: 18,
+                            //     // ),
+                            //
+                            //
+                            //
+                            //     // child: Checkbox(
+                            //     //    value: null,
+                            //     //   onChanged: (value) {
+                            //     //     setState(() {
+                            //     //       // _value = value!;
+                            //     //     });
+                            //     //   },
+                            //     //   activeColor: Colors.white,
+                            //     //   checkColor: Colors.black,
+                            //     //   testate: false,
+                            //     // ),
+                            //   ),
+                            // ),
                             const SizedBox(
                               width: 50,
                             ),
                             Row(children: [
                               Image.asset(
-                                'assets/img/salary.png',
+                                'assets/images/salary_logo.png',
                                 height: 50,
                                 width: 50,
                               ),
                               const SizedBox(
                                 width: 15,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
+                              const Padding(
+                                padding: EdgeInsets.only(top: 10),
                                 child: Text(
                                   "Cash On Delivery",
                                   style: TextStyle(
@@ -260,7 +303,7 @@ class _PaymentCard extends State<PaymentCard> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 260,
             ),
             Container(
@@ -299,3 +342,93 @@ class _PaymentCard extends State<PaymentCard> {
     );
   }
 }
+
+
+// import 'package:flutter/material.dart';
+// void main() => runApp(const MyApp(key: null,));
+// /// This is the main application widget.
+// class MyApp extends StatelessWidget {
+//   const MyApp({required Key key}) : super(key: key);
+//   static const String _title = 'Radio buttons';
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: _title,
+//       debugShowCheckedModeBanner: false,
+//       theme: ThemeData(
+//         primaryColor: Colors.black,
+//         hintColor: Colors.black,
+//       ),
+//       home: Scaffold(
+//         appBar: AppBar(title: const Text(_title)),
+//         body: const Center(
+//           child: MyStatefulWidget(key: null,),
+//         ),
+//       ),
+//     );
+//   }
+// }
+// enum Pet { dog, cat }
+// /// This is the stateful widget that the main application instantiates.
+// class MyStatefulWidget extends StatefulWidget {
+//   const MyStatefulWidget({required Key key}) : super(key: key);
+//   @override
+//   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+// }
+// /// This is the private State class that goes with MyStatefulWidget.
+// class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+//   final Pet _pet = Pet.dog;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//
+//     return Column(
+//
+//       children: <Widget>[
+//         ListTile(
+//           title: const Text('Dog'),
+//           leading: Radio<Pet>(
+//             value: Pet.dog,
+//             groupValue: _pet,
+//             onChanged: (){},
+//             // (Pet value) {
+//             //   setState(() {
+//             //     _pet = value;
+//             //   });
+//             // },
+//           ),
+//         ),
+//         ListTile(
+//           title: const Text('Cart'),
+//           leading: Radio<Pet>(
+//             value: Pet.cat,
+//             groupValue: _pet,
+//             onChanged: () {},
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
+//
+//
+//
+// @override
+// Widget build(BuildContext context) {
+//   if (this.direction == Axis.vertical) {
+//     return Column(
+//       children: _group,
+//     );
+//   }
+//
+//   return Row(
+//     mainAxisAlignment: this.horizontalAlignment,
+//     children: _group,
+//   );
+// }
+//
+// class _group {
+// }
+// }
+

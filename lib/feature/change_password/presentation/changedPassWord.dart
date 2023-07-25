@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../global_widget/custom_button.dart';
+
 
 class ChangedPassWord extends StatefulWidget {
   const ChangedPassWord({super.key});
@@ -146,29 +148,34 @@ class _ChangedPassWord extends State<ChangedPassWord> {
                 ],
               ),
             ),
-            Material(
-              child: ElevatedButton(
-                onPressed: () {
-                 
-                },
-                style: ElevatedButton.styleFrom(
-                  elevation: 0.0,
-                  foregroundColor: const Color(0xffFFFFFF),
-                  backgroundColor: const Color(0xff00C8B8),
-                  minimumSize: const Size(double.infinity, 55.0),
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  ),
-                  textStyle: Theme.of(context).textTheme.button?.copyWith(
-                        fontSize: 15.0,
-                      ),
-                ),
-                child: const Text(
-                  'SAVE  >',
-                ),
-              ),
+            CustomElevatedButton(
+              onTap: () {},
+              title: 'Save > ',
+              color: const Color(0xff00C8B8),
             ),
+            // Material(
+            //   child: ElevatedButton(
+            //     onPressed: () {
+            //
+            //     },
+            //     style: ElevatedButton.styleFrom(
+            //       elevation: 0.0,
+            //       foregroundColor: const Color(0xffFFFFFF),
+            //       backgroundColor: const Color(0xff00C8B8),
+            //       minimumSize: const Size(double.infinity, 55.0),
+            //       padding: const EdgeInsets.symmetric(horizontal: 16),
+            //       shape: const RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            //       ),
+            //       textStyle: Theme.of(context).textTheme.button?.copyWith(
+            //             fontSize: 15.0,
+            //           ),
+            //     ),
+            //     child: const Text(
+            //       'SAVE  >',
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

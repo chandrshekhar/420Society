@@ -30,7 +30,7 @@ class _TrackOrderPage extends State<TrackOrderPage> {
       ),
 
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(5.0),
         child: ListView.builder(
             itemCount: 5,
             shrinkWrap: true,

@@ -3,8 +3,8 @@
 
 class ApiEndPoints{
   ApiEndPoints._();
-  static const String BASE_URL = "https://backend.zerowastecitizen.in/";
-  static const String login = "${BASE_URL}user/login";
+  static const String BASE_URL = "https://excellis.co.in/420-society-world/";
+  static const String login = "${BASE_URL}api/v1/login";
   static const String fetchBranches = "${BASE_URL}dashboard/branches";
   static const String userProfile = "${BASE_URL}user/profile";
   static const String changePassword = "${BASE_URL}user/change_password";
@@ -17,6 +17,7 @@ class ApiEndPoints{
   static const String fetchCitizen = "${BASE_URL}userDetail/citizen";
   static const String fetchDist = "${BASE_URL}district";
   static const String city = "${BASE_URL}city";
+  static const String signup = "${BASE_URL}api/v1/register";
 }
 
 class ApiConfig{

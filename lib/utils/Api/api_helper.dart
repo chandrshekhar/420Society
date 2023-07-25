@@ -3,32 +3,35 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+
+
+
 import 'package:four20society/utils/local_storage/local_storage.dart';
 
-mixin ApiHelper{
+mixin ApiHelper {
   final Dio _dio = Dio();
-   Future<dynamic> postTypeHelper(dynamic body, String url,
+  Future<dynamic> postTypeHelper(dynamic body, String url,
       {bool isHeaderNeed = false,
-      bool isParamNeed = false,
-      Map<String,dynamic>? queryParameters,
-      int param = 0}) async {
+        bool isParamNeed = false,
+        Map<String, dynamic>? queryParameters,
+        int param = 0}) async {
     LocalStorageService localStorageService = LocalStorageService();
-    String token = await localStorageService.getFromDisk(LocalStorageService.ACCESS_TOKEN_KEY)??"";
-    String uId = await localStorageService.getFromDisk(LocalStorageService.USER_ID)??"";
+    String token = await localStorageService
+        .getFromDisk(LocalStorageService.ACCESS_TOKEN_KEY) ??
+        "";
+    // String uId = await localStorageService.getFromDisk(LocalStorageService.USER_ID)??"";
     if (kDebugMode) {
       print(url.toString());
       print(queryParameters);
       print("token pandey ${token}");
-      print(uId);
+      // print(uId);
     }
     try {
-      Response response =  await _dio.post(url,
-      data: jsonEncode(body),
-              options: Options(headers: {
-              if(uId.isNotEmpty)
-              "uid":uId,
-              if(token.isNotEmpty)
-              "token":token}));
+      Response response = await _dio.post(url,
+          data: jsonEncode(body),
+          options: Options(headers: {
+            "Authorization": "Bearer $token",
+          }));
       if (kDebugMode) {
         print(response.data.toString());
       }
@@ -41,7 +44,7 @@ mixin ApiHelper{
       if (kDebugMode) {
         log(e.toString());
       }
-     if (DioErrorType.badResponse == e.type) {
+      if (DioErrorType.badResponse == e.type) {
         if (kDebugMode) {
           log(e.response!.data.toString());
         }

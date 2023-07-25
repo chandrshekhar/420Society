@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:four20society/constants/colors/app_colors.dart';
 import 'package:four20society/constants/routes/routes_name.dart';
 import 'package:four20society/global_widget/custom_button.dart';
@@ -9,6 +8,10 @@ class IntroOneScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(seconds: 5)).then((val) {
+      Navigator.pushNamedAndRemoveUntil(
+          context, AppRoute.intro2Screen, (route) => false);
+    });
     return Scaffold(
         body: Stack(
           fit: StackFit.loose,

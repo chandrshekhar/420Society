@@ -3,8 +3,9 @@ import 'package:four20society/feature/about_us/presentation/about_us.dart';
 import 'package:four20society/feature/address/presentation/added_address.dart';
 import 'package:four20society/feature/help_support/presentation/termcondition.dart';
 import 'package:four20society/feature/notification/presentation/notification_screen.dart';
-
 import 'package:four20society/feature/track_order/presentation/track_order.dart';
+import '../feature/payment/presentation/paymentcard.dart';
+
 
 Widget customDrawer({required context}) {
   final mediaQuery = MediaQuery.of(context);
@@ -28,7 +29,7 @@ Widget customDrawer({required context}) {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const CircleAvatar(
-                  backgroundImage: AssetImage('assets/img/profile.png'),
+                  backgroundImage: AssetImage('assets/images/profile.png'),
                   radius: 40,
                 ),
                 const SizedBox(
@@ -64,9 +65,10 @@ Widget customDrawer({required context}) {
         ),
         Expanded(
           child: ListView(
+            padding: const EdgeInsets.only(top: 10, bottom: 18),
             children: [
               Container(
-                padding: const EdgeInsets.only(top: 0, left: 10),
+                padding: const EdgeInsets.only(top: 0, left: 10, bottom: 8),
                 child: Text(
                   "your information".toUpperCase(),
                   style: const TextStyle(
@@ -80,8 +82,9 @@ Widget customDrawer({required context}) {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(bottom: 10, top: 10),
-                    padding: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(bottom: 0, top: 0),
+                    padding: const EdgeInsets.only(
+                        top: 0, bottom: 0, left: 10, right: 10),
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 211, 209, 209)
                           .withOpacity(0.4),
@@ -144,8 +147,8 @@ Widget customDrawer({required context}) {
                         ),
                         ListTile(
                           onTap: () {
-                            // Navigator.pop(context);
-                            // Navigator.push(context, MaterialPageRoute(builder: (context)=>const PaymentCard()));
+                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const PaymentCard()));
                           },
                           title: const Text(
                             "Payment Method",
@@ -161,8 +164,11 @@ Widget customDrawer({required context}) {
                   Container()
                 ],
               ),
+              const Padding(
+                padding: EdgeInsets.only(top: 0),
+              ),
               Container(
-                padding: const EdgeInsets.only(top: 0, left: 10),
+                padding: const EdgeInsets.only(top: 10, left: 10),
                 child: Text(
                   "Other information".toUpperCase(),
                   style: const TextStyle(
@@ -177,7 +183,8 @@ Widget customDrawer({required context}) {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(bottom: 10, top: 10),
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(
+                        top: 0, bottom: 0, left: 10, right: 10),
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 211, 209, 209)
                           .withOpacity(0.4),
@@ -269,3 +276,135 @@ Widget customDrawer({required context}) {
     ),
   );
 }
+// enum SingingCharacter { lafayette, jefferson } //new
+// class PaymentCard extends StatefulWidget {
+//   const PaymentCard({Key? key}) : super(key: key);
+//
+//   @override
+//   State<PaymentCard> createState() => _PaymentCard();
+// }
+
+// class _PaymentCard extends State<PaymentCard> {
+//   SingingCharacter? _character = SingingCharacter.lafayette;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text("Payment Method"),
+//         centerTitle: true,
+//         backgroundColor: Colors.white,
+//         elevation: 0,
+//         leading: IconButton(
+//           onPressed: () {
+//             Navigator.pop(context);
+//           },
+//           icon: const Icon(
+//             Icons.arrow_back_ios,
+//             color: Colors.black,
+//           ),
+//         ),
+//       ),
+//       body: Column(
+//         children: [
+//           Container(
+//             margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+//             padding: const EdgeInsets.only(
+//                 top: 0, bottom: 0, left: 10, right: 10),
+//             decoration: BoxDecoration(
+//               color: const Color.fromARGB(255, 211, 209, 209).withOpacity(0.4),
+//               borderRadius: BorderRadius.circular(8),
+//             ),
+//             width: MediaQuery.of(context).size.width * 0.9,
+//             child: Column(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               crossAxisAlignment: CrossAxisAlignment.center,
+//               children: [
+//                 ListTile(
+//                   onTap: () {
+//                     Navigator.pop(context);
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                             builder: (context) => const AboutUsPage()));
+//                   },
+//                   title: const Text(
+//                     "Add New Card",
+//                     style: TextStyle(
+//                         fontSize: 15,
+//                         fontWeight: FontWeight.normal,
+//                         color: Colors.black),
+//                   ),
+//                 ),
+//                 ListTile(
+//                   onTap: () {
+//                     Navigator.pop(context);
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                             builder: (_) => const AboutUsPage()));
+//                   },
+//                   title: const Text(
+//                     "Add New Bank Account",
+//                     style: TextStyle(
+//                         fontSize: 15,
+//                         fontWeight: FontWeight.normal,
+//                         color: Colors.black),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//           Container(
+//             margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+//             padding: const EdgeInsets.only(
+//                 top: 0, bottom: 0, left: 10, right: 10),
+//             decoration: BoxDecoration(
+//               color: const Color.fromARGB(255, 211, 209, 209).withOpacity(0.4),
+//               borderRadius: BorderRadius.circular (8), //new
+//             ),
+//             width: MediaQuery.of(context).size.width * 0.9,
+//              child: Column(
+//                 mainAxisAlignment: MainAxisAlignment.center,
+//                 crossAxisAlignment: CrossAxisAlignment.center,
+//                 children: [
+//                   ListTile(
+//                     onTap: () {
+//                       Navigator.pop(context);
+//                       Navigator.push(
+//                           context,
+//                           MaterialPageRoute(
+//                               builder: (context) => const AboutUsPage()));
+//                     },
+//                     title: const Text(
+//                       "Add New Card",
+//                       style: TextStyle(
+//                           fontSize: 15,
+//                           fontWeight: FontWeight.normal,
+//                           color: Colors.black),
+//                     ),
+//                   ),
+//                   ListTile(
+//                     onTap: () {
+//                       Navigator.pop(context);
+//                       Navigator.push(
+//                           context,
+//                           MaterialPageRoute(
+//                               builder: (_) => const AboutUsPage()));
+//                     },
+//                     title: const Text(
+//                       "Add New Bank Account",
+//                       style: TextStyle(
+//                           fontSize: 15,
+//                           fontWeight: FontWeight.normal,
+//                           color: Colors.black),
+//                     ),
+//                   ),
+//                 ],
+//               ),  //new child
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+//
