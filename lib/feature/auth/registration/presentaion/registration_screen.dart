@@ -27,6 +27,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController cnfPassController = TextEditingController();
    String radioGroup = "";
+  bool isTextObscurePassword = true;
+  bool isTextObscureConfrmPassword = true;
    List<String> radioList = ["lbl_seller", "lbl_customer"];
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -100,22 +102,36 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             CustomValidation.validatePhoneNumber(input ?? ''),
                       ),
                       InputFieldWidget(
-                        obscureText: true,
+                        obscureText: isTextObscurePassword,
                         controller: passwordController,
                         hintText: 'Password',
                         validator: (input) =>
                             CustomValidation.validatePassword(input!),
-                        sufferIcon: const Icon(Icons.visibility),
+                        sufferIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isTextObscurePassword =
+                              !isTextObscurePassword;
+                            });
+                          },
+                          child: isTextObscurePassword
+                              ? const Icon(
+                            Icons.visibility_off_rounded,
+                          )
+                              : const Icon(
+                            Icons.visibility_rounded,
+                          ),
+                        ),
                       ),
                       InputFieldWidget(
-                        obscureText: true,
+                        obscureText: isTextObscureConfrmPassword,
                         controller: cnfPassController,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please re-enter password';
                           }
-                          print(passwordController.text);
-                          print(cnfPassController.text);
+                          // print(passwordController.text);
+                          // print(cnfPassController.text);
                           if (passwordController.text !=
                               cnfPassController.text) {
                             return "Password does not match";
@@ -123,9 +139,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           return null;
                         },
                         hintText: 're-password',
-                        sufferIcon: const Icon(Icons.visibility),
+                        sufferIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isTextObscureConfrmPassword =
+                              !isTextObscureConfrmPassword;
+                            });
+                          },
+                          child: isTextObscureConfrmPassword
+                              ? const Icon(
+                            Icons.visibility_off_rounded,
+                          )
+                              : const Icon(
+                            Icons.visibility_rounded,
+                          ),
+                        ),
+                        // sufferIcon: const Icon(Icons.visibility),
                       ),
                       const SizedBox(height: 60),
+
                       BlocListener<SignupBloc, SignupState>(
                         listener: (context, state) {
                           print("state --> $state");
@@ -141,13 +173,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     builder: (context) =>
                                         const DashboardScreen()),
                                 (route) => false);
-                          } else if (state is SignupErrorState) {
-                            ToastMessage().toast(
-                                duration: 5000,
-                                context: context,
-                                message: state.errorMsg.toString(),
-                                messageColor: Colors.white,
-                                background: Colors.redAccent);
+                          }
+                          else if (state is SignupErrorState) {
+                            // ToastMessage().toast(
+                            //     duration: 5000,
+                            //     context: context,
+                            //     message: state.errorMsg.toString(),
+                            //     messageColor: Colors.white,
+                            //     background: Colors.redAccent);
+                            // ToastMessage().toast(
+                            //     context: context,
+                            //     message: state.responseModel.message.toString(),
+                            //     messageColor: Colors.white,
+                            //     background: Colors.green);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const DashboardScreen()),
+                                    (route) => false);
                           }
                         },
                         child: CustomElevatedButton(
@@ -161,7 +205,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       confirmPassword:
                                           cnfPassController.text.trim(),
                                       phone: phoneController.text.trim(),
-                                  user_type: "BUSINESS_OWNER"));
+                                  user_type: "Seller"));
                             }
                           },
                           title: "Registration",

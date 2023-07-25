@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:four20society/feature/notification/presentation/notification_screen.dart';
 import 'package:four20society/global_widget/app_drawar.dart';
+import 'package:four20society/global_widget/custom_appbar.dart';
 import '../../../global_widget/custom_concenrate_product.dart';
 import '../../../global_widget/custom_home_product_card.dart';
 import '../../../global_widget/custom_todays_deal_product_cart.dart';
@@ -29,6 +30,7 @@ class _DashboardScreen extends State<DashboardScreen> {
         MediaQuery.of(context).padding.top;
     return Scaffold(
       key: _scaffoldKey,
+
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
@@ -59,21 +61,14 @@ class _DashboardScreen extends State<DashboardScreen> {
           ),
         ),
       ),
+
       drawer: customDrawer(context: context),
+
       body: ListView(
         children: <Widget>[
           Row(
-            // onTab: () {
-            //   Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //       builder: (context) => const NotificationScreen(),
-            //     ),
-            //   );
-            // },
             children: [
               SizedBox(
-
                 width: MediaQuery.of(context).size.width * 0.85,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -135,7 +130,6 @@ class _DashboardScreen extends State<DashboardScreen> {
           SizedBox(
             height: 115.0,
             child: ListView.builder(
-
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: 9,
@@ -284,11 +278,12 @@ class _DashboardScreen extends State<DashboardScreen> {
                     itemCount: 10,
                     itemBuilder: (context, index) {
                       return CustomHomeProductCardWidget(
-                        onPressed: (){
+                        onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ProductWishListScreen()));
+                                  builder: (context) =>
+                                      const ProductWishListScreen()));
                         },
                       );
                     },
@@ -333,9 +328,7 @@ class _DashboardScreen extends State<DashboardScreen> {
                     scrollDirection: Axis.horizontal,
                     itemCount: 10,
                     itemBuilder: (context, index) {
-                       return const CustomTodayProductCardWidget();
-
-
+                      return const CustomTodayProductCardWidget();
                     },
                   ),
                 ),
@@ -558,7 +551,7 @@ class _DashboardScreen extends State<DashboardScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                   const Padding(
+                    const Padding(
                       padding: EdgeInsets.only(left: 10, top: 10),
                       child: Text(
                         "Vapes",
@@ -683,7 +676,7 @@ class _DashboardScreen extends State<DashboardScreen> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
-                            //to set border radius to button
+                              //to set border radius to button
                               borderRadius: BorderRadius.circular(4)),
                           backgroundColor: const Color(0XFF00C8B8),
                         ),
@@ -751,5 +744,4 @@ class _DashboardScreen extends State<DashboardScreen> {
   }
 }
 
-class CartPage {
-}
+class CartPage {}

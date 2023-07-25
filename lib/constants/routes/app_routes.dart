@@ -46,27 +46,28 @@ class RoutesGenerator {
       case '/forgetPassword':
         return MaterialPageRoute(builder: (_) => const ForgetPasswordScreen());
       case '/login':
-        return MaterialPageRoute(builder: (_) =>   LoginScreen());
+        return MaterialPageRoute(builder: (_) => LoginScreen());
       case '/notificationScreen':
         return MaterialPageRoute(builder: (_) => const NotificationScreen());
-        case '/productCategoryScreen':
+      case '/productCategoryScreen':
         return MaterialPageRoute(builder: (_) => const ProductCategoryScreen());
-        case '/productWishListScreen':
+      case '/productWishListScreen':
         return MaterialPageRoute(builder: (_) => const ProductWishListScreen());
-        case '/paymentCard':
+      case '/paymentCard':
         return MaterialPageRoute(builder: (_) => const PaymentCard());
-        case '/trackOrderPage':
+      case '/trackOrderPage':
         return MaterialPageRoute(builder: (_) => const TrackOrderPage());
-        case '/termConditionPage':
+      case '/termConditionPage':
         return MaterialPageRoute(builder: (_) => const TermConditionPage());
-        case '/registration':
+      case '/registration':
         return MaterialPageRoute(builder: (_) => const RegistrationScreen());
       case '/userProfileScreen':
         return MaterialPageRoute(builder: (_) => const UserProfileScreen());
 
       default:
         return MaterialPageRoute(
-            builder: (_) => Scaffold(
+            builder: (_) =>
+                Scaffold(
                   body: Center(
                     child: Text('No route defined for ${routeSettings.name}'),
                   ),
@@ -100,15 +101,3 @@ class RoutesGenerator {
 
 
 
-// case '/notificationScreen':
-// return MaterialPageRoute(builder: (_) => const NotificationScreen());
-// case '/productCategoryScreen':
-// return MaterialPageRoute(builder: (_) => const ProductCategoryScreen());
-// case '/productWishListScreen':
-// return MaterialPageRoute(builder: (_) => const ProductWishListScreen());
-// case '/paymentCard':
-// return MaterialPageRoute(builder: (_) => const PaymentCard());
-// case '/trackOrderPage':
-// return MaterialPageRoute(builder: (_) => const TrackOrderPage());
-// case '/termConditionPage':
-// return MaterialPageRoute(builder: (_) => const TermConditionPage());

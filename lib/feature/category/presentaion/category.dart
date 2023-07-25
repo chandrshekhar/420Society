@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:four20society/global_widget/app_drawar.dart';
-
 import '../../notification/presentation/notification_screen.dart';
 
 class ProductCategoryScreen extends StatefulWidget {

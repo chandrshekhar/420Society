@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 90),
                     BlocListener<LoginBloc, LoginState>(
                       listener: (context, state) {
-                        print("state --> $state");
+                        // print("state --> $state");
                         if (state is LoginLoadedState) {
                           ToastMessage().toast(
                               context: context,
@@ -127,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             BlocProvider.of<LoginBloc>(context).add(LoginEvents(
                                 email: emailController.text.trim(),
                                 password: passwordController.text.trim(),
-                                user_type: 'BUSINESS_OWNER'
+                                user_type: 'Seller'
                             ));
                           }
                         },

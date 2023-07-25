@@ -1,7 +1,8 @@
 import 'dart:math';
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import '../../../../utils/local_storage/local_storage.dart';
+import '../model/registration_model.dart';
 import '../../../../utils/local_storage/local_storage.dart';
 import '../model/registration_model.dart';
 import '../repo/registration_repo.dart';
@@ -28,7 +29,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
         print("statusss-->  ${myList.status}");
         if (myList.status == true) {
           LocalStorageService().saveToDisk(
-              LocalStorageService.ACCESS_TOKEN_KEY, myList.data.authToken);
+              LocalStorageService.ACCESS_TOKEN_KEY, myList.data?.authToken);
           emit(SignupLoadedState(responseModel: myList));
         } else {
           emit(SignupErrorState(errorMsg: myList.message.toString()));
