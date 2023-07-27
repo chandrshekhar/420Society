@@ -22,5 +22,6 @@ class AppRoute {
   static const String termConditionPage = "/termConditionPage";
   static const String registrationScreen = '/registration';
   static const String userProfileScreen="/userProfileScreen";
+  static const String dashboardScreen = "/dashboardScreen";
 
 }

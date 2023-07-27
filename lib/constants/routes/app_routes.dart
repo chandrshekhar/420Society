@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:four20society/feature/auth/forget_password/presentation/forget_password_screen.dart';
 import 'package:four20society/feature/auth/login/presentaion/login_screen.dart';
 import 'package:four20society/feature/auth/registration/presentaion/registration_screen.dart';
+import 'package:four20society/feature/dashboard/presentation/dashboards.dart';
 import 'package:four20society/feature/welcome/intro1_screen.dart';
 import 'package:four20society/feature/welcome/intro2_screen.dart';
 import 'package:four20society/feature/welcome/splace_screen.dart';
@@ -46,7 +47,7 @@ class RoutesGenerator {
       case '/forgetPassword':
         return MaterialPageRoute(builder: (_) => const ForgetPasswordScreen());
       case '/login':
-        return MaterialPageRoute(builder: (_) => LoginScreen());
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
       case '/notificationScreen':
         return MaterialPageRoute(builder: (_) => const NotificationScreen());
       case '/productCategoryScreen':
@@ -63,11 +64,12 @@ class RoutesGenerator {
         return MaterialPageRoute(builder: (_) => const RegistrationScreen());
       case '/userProfileScreen':
         return MaterialPageRoute(builder: (_) => const UserProfileScreen());
+      case "/dashboardScreen":
+        return MaterialPageRoute(builder: (_) => const DashboardScreen());
 
       default:
         return MaterialPageRoute(
-            builder: (_) =>
-                Scaffold(
+            builder: (_) => Scaffold(
                   body: Center(
                     child: Text('No route defined for ${routeSettings.name}'),
                   ),
@@ -75,29 +77,3 @@ class RoutesGenerator {
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

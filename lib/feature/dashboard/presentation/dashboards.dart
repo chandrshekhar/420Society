@@ -1,13 +1,18 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:four20society/feature/notification/presentation/notification_screen.dart';
 import 'package:four20society/global_widget/app_drawar.dart';
-import 'package:four20society/global_widget/custom_appbar.dart';
+import 'package:four20society/utils/Api/api_calling/api_provider.dart';
+import '../../../constants/apis_path/api_config_string.dart';
 import '../../../global_widget/custom_concenrate_product.dart';
 import '../../../global_widget/custom_home_product_card.dart';
 import '../../../global_widget/custom_todays_deal_product_cart.dart';
-import '../../cart/presentation/cart_page.dart';
+import '../../category/model/category_model.dart';
 import '../../wish_list/presentation/wishlist_page.dart';
+import 'package:http/http.dart' as http;
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -17,6 +22,22 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreen extends State<DashboardScreen> {
+  ApiProvider apiProvider = ApiProvider();
+  List<Data> categoryList = [];
+  void categoryData() async {
+    var resData = await apiProvider.getAllCategory();
+    log(resData.data!.toString());
+    setState(() {
+      categoryList = resData!.data!;
+    });
+  }
+
+  @override
+  void iniState() {
+    // categoryData();
+    super.initState();
+  }
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final List<Map> myProducts =
@@ -28,9 +49,10 @@ class _DashboardScreen extends State<DashboardScreen> {
     final _screenHeight = MediaQuery.of(context).size.height -
         kToolbarHeight -
         MediaQuery.of(context).padding.top;
+    print("categoryList ${categoryList}");
+
     return Scaffold(
       key: _scaffoldKey,
-
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
@@ -61,9 +83,7 @@ class _DashboardScreen extends State<DashboardScreen> {
           ),
         ),
       ),
-
       drawer: customDrawer(context: context),
-
       body: ListView(
         children: <Widget>[
           Row(
@@ -117,6 +137,8 @@ class _DashboardScreen extends State<DashboardScreen> {
                     Icons.notifications_active_outlined,
                   ),
                   onPressed: () {
+                    // print("categoryList ${categoryList}");
+                    categoryData();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -126,13 +148,14 @@ class _DashboardScreen extends State<DashboardScreen> {
               ),
             ],
           ),
-          // const SizedBox(height:2 ),
+
           SizedBox(
             height: 115.0,
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: 9,
+              // itemCount: myProducts.length,
+               itemCount: categoryList.length,
               itemBuilder: (BuildContext context, int index) => Column(
                 children: [
                   Column(
@@ -142,15 +165,16 @@ class _DashboardScreen extends State<DashboardScreen> {
                         width: 80,
                         margin: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                            color: Colors.transparent,
+                            color: Color(0xff00C8B8),
                             borderRadius: BorderRadius.circular(100),
                             border: Border.all(),
-                            image: const DecorationImage(
+                            image:  DecorationImage(
                                 image: NetworkImage(
-                                    "https://excellis.co.in/420-society-world/public/storage/products/1678453548_50172_edbee168-fa13-41a1-85b6-47c81e322be7.jfif"))),
+                                      "${ApiEndPoints.Storage+ categoryList[index].image!}"
+                                ))),
                       ),
                       Text(
-                        myProducts[index]["name"],
+                        categoryList[index].name!,
                         style: const TextStyle(
                             color: Color.fromARGB(255, 39, 8, 8), fontSize: 16),
                       ),
@@ -397,7 +421,6 @@ class _DashboardScreen extends State<DashboardScreen> {
           ),
           Container(
             height: _screenHeight * 0.45,
-            // color: Colors.red,
             margin: const EdgeInsets.all(12),
             child: Column(
               children: [
@@ -500,7 +523,6 @@ class _DashboardScreen extends State<DashboardScreen> {
           //  boxes card design
           Container(
             height: _screenHeight * 0.45,
-            // color: Colors.red,
             margin: const EdgeInsets.all(12),
             child: Column(
               children: [
@@ -640,10 +662,6 @@ class _DashboardScreen extends State<DashboardScreen> {
                   "https://excellis.co.in/420-society-world/frontend_assets/images/canabi.png",
                   fit: BoxFit.fill,
                 ),
-                // Image.asset(
-                //   "assets/img/Mask group.png",
-                //   fit: BoxFit.fitHeight,
-                // ),
                 Padding(
                   padding: const EdgeInsets.only(left: 18),
                   child: Column(
@@ -698,7 +716,6 @@ class _DashboardScreen extends State<DashboardScreen> {
 
           Container(
             height: _screenHeight * 0.45,
-            // color: Colors.red,
             margin: const EdgeInsets.all(12),
             child: Column(
               children: [
@@ -743,5 +760,3 @@ class _DashboardScreen extends State<DashboardScreen> {
     );
   }
 }
-
-class CartPage {}

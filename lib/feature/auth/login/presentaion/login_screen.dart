@@ -110,7 +110,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const DashboardScreen()),
+
+                                      const HomePageWithBottomBar()),
                               (route) => false);
                         } else if (state is LoginErrorState) {
                           ToastMessage().toast(

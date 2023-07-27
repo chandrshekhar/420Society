@@ -3,28 +3,16 @@
 
 class ApiEndPoints{
   ApiEndPoints._();
+  static const String Storage ="https://excellis.co.in/420-society-world/public/storage/";
   static const String BASE_URL = "https://excellis.co.in/420-society-world/";
   static const String login = "${BASE_URL}api/v1/login";
   static const String fetchBranches = "${BASE_URL}dashboard/branches";
   static const String userProfile = "${BASE_URL}user/profile";
   static const String changePassword = "${BASE_URL}user/change_password";
   static const String dashboard = "${BASE_URL}dashboard";
-  static const String add_citizen = "${BASE_URL}userDetail/add_citizen";
-  static const String add_user = "${BASE_URL}userDetail/add_user";
-  static const String fetchState = "${BASE_URL}state";
-  static const String fetchCity = "${BASE_URL}city";
-  static const String fetchCountry = "${BASE_URL}country";
-  static const String fetchCitizen = "${BASE_URL}userDetail/citizen";
-  static const String fetchDist = "${BASE_URL}district";
-  static const String city = "${BASE_URL}city";
   static const String signup = "${BASE_URL}api/v1/register";
-}
-
-class ApiConfig{
-  ApiConfig._();
-  static const String CONTENT_TYPE = "application/json";
-  static const String AUTH_KEY= "Auth-Key";
-  static const String AUTH_VALUE= "4UyYF2Sqz256901zrjoAAZpqf67";
-  static const String CLIENT_SERVICE_KEY = "Client-Service";
-  static const String CLIENT_SERVICE_VALUE = "ZWCAPP";
+  static const String category="${BASE_URL}api/v1/home/category";
+  static const String featuredProduct="${BASE_URL}api/v1/home/featured-product";
+  static const String todayDeals = "${BASE_URL}api/v1/home/today-deals";
+  static const String productCategory="${BASE_URL}api/v1/home/product-by-category";
 }

@@ -14,11 +14,11 @@ class IntroOneScreen extends StatelessWidget {
     });
     return Scaffold(
         body: Stack(
-          fit: StackFit.loose,
+      fit: StackFit.loose,
       children: [
         Container(
-          width: MediaQuery.of(context).size.width,
-          child: Image.asset("assets/images/intro1.png",fit: BoxFit.fill)),
+            width: MediaQuery.of(context).size.width,
+            child: Image.asset("assets/images/intro1.png", fit: BoxFit.fill)),
         Positioned(
             top: 80,
             left: MediaQuery.of(context).size.width * 0.2,
@@ -50,8 +50,8 @@ class IntroOneScreen extends StatelessWidget {
             child: CustomElevatedButton(
               color: AppColors.buttonColor,
               onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                  context, AppRoute.loginScreen, (route) => false);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, AppRoute.loginScreen, (route) => false);
               },
               title: "NEXT    >",
               width: 240,

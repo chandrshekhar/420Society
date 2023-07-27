@@ -130,8 +130,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           if (value!.isEmpty) {
                             return 'Please re-enter password';
                           }
-                          // print(passwordController.text);
-                          // print(cnfPassController.text);
                           if (passwordController.text !=
                               cnfPassController.text) {
                             return "Password does not match";
@@ -154,7 +152,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             Icons.visibility_rounded,
                           ),
                         ),
-                        // sufferIcon: const Icon(Icons.visibility),
                       ),
                       const SizedBox(height: 60),
 

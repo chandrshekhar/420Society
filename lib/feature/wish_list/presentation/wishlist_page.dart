@@ -42,6 +42,5 @@ class _ProductWishListScreen extends State<ProductWishListScreen> {
     );
   }
 
-  //start of cart design
  
 }

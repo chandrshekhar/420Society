@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:four20society/global_widget/app_drawar.dart';
+import 'package:four20society/utils/Api/api_calling/api_provider.dart';
+import '../../../constants/apis_path/api_config_string.dart';
 import '../../notification/presentation/notification_screen.dart';
+import '../model/category_model.dart';
 
 class ProductCategoryScreen extends StatefulWidget {
   const ProductCategoryScreen({super.key});
@@ -10,22 +13,33 @@ class ProductCategoryScreen extends StatefulWidget {
 }
 
 class _ProductCategoryScreen extends State<ProductCategoryScreen> {
-   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<Map> myProducts =
-  List.generate(7, (index) => {"id": index, "name": "Product $index"})
-      .toList();
+      List.generate(7, (index) => {"id": index, "name": "Product $index"})
+          .toList();
+
+  ApiProvider apiProvider = ApiProvider();
+  List<Data> categoryList = [];
+  categoryData() async{
+     var resData = await apiProvider.getAllCategory();
+     setState(() {
+       categoryList = resData!.data!;
+     });
+  }
+
+  @override
+  void initState() {
+    setState(() {
+      categoryData();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final  _screenHeight = MediaQuery
-        .of(context)
-        .size
-        .height -
+    final _screenHeight = MediaQuery.of(context).size.height -
         kToolbarHeight -
-        MediaQuery
-            .of(context)
-            .padding
-            .top;
+        MediaQuery.of(context).padding.top;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -45,7 +59,6 @@ class _ProductCategoryScreen extends State<ProductCategoryScreen> {
           ),
         ),
       ),
-
       drawer: customDrawer(context: context),
       body: Column(
         children: [
@@ -54,13 +67,14 @@ class _ProductCategoryScreen extends State<ProductCategoryScreen> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.85,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 20.0),
                   child: TextField(
                     decoration: InputDecoration(
                       fillColor: const Color(0xffCCF4F1),
                       filled: true,
-                      contentPadding:
-                      const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 15),
                       hintText: 'What would you like ?',
                       hintStyle: TextStyle(
                         fontWeight: FontWeight.w400,
@@ -92,7 +106,8 @@ class _ProductCategoryScreen extends State<ProductCategoryScreen> {
                   ),
                 ),
               ),
-              SizedBox(width: MediaQuery.of(context).size.width * 0.15,
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.15,
                 child: IconButton(
                   icon: const Icon(
                     Icons.notifications_active_outlined,
@@ -101,8 +116,7 @@ class _ProductCategoryScreen extends State<ProductCategoryScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                            const NotificationScreen()));
+                            builder: (context) => const NotificationScreen()));
                   },
                 ),
               ),
@@ -115,18 +129,31 @@ class _ProductCategoryScreen extends State<ProductCategoryScreen> {
                     childAspectRatio: 4 / 3,
                     crossAxisSpacing: 20,
                     mainAxisSpacing: 20),
-                itemCount: myProducts.length,
+                itemCount: categoryList.length,
                 itemBuilder: (BuildContext ctx, index) {
                   return Column(
                     children: [
-                     const  CircleAvatar(
-                        radius: 52,
-                        backgroundColor: Color(0xff00C8B8),
+                      Container(
+                        height: 80,
+                        width: 80,
+                        margin: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            color: Color(0xff00C8B8),
+                            borderRadius: BorderRadius.circular(100),
 
+                            border: Border.all(),
+                            image:  DecorationImage(
+                                image: NetworkImage(
+                                    "${ApiEndPoints.Storage+ categoryList[index].image!}"
+                                ))),
                       ),
+                      // const CircleAvatar(
+                      //   radius: 52,
+                      //   backgroundColor: Color(0xff00C8B8),
+                      // ),
                       const SizedBox(height: 10),
                       Text(
-                        myProducts[index]["name"],
+                           categoryList[index].name!,
                         style: const TextStyle(
                             color: Color.fromARGB(255, 39, 8, 8), fontSize: 16),
                       ),

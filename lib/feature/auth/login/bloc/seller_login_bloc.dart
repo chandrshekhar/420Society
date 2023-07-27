@@ -16,7 +16,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       Map<String, dynamic> requestModel = {
         "email": event.email,
         "password": event.password,
-        "user_type":"BUSINESS_OWNER"
+        "user_type":"Seller"
       };
       try {
         emit(LoginLodingState());
