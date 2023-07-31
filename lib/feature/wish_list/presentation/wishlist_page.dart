@@ -38,6 +38,7 @@ class _ProductWishListScreen extends State<ProductWishListScreen> {
           itemCount: 5,
           itemBuilder: (BuildContext context, int index) {
             return const CustomProductCardWidget();
+
           }),
     );
   }

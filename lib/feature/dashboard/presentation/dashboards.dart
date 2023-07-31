@@ -12,6 +12,7 @@ import '../../../global_widget/custom_home_product_card.dart';
 import '../../../global_widget/custom_todays_deal_product_cart.dart';
 import '../../category/model/category_model.dart';
 import '../../wish_list/presentation/wishlist_page.dart';
+
 import 'package:http/http.dart' as http;
 
 class DashboardScreen extends StatefulWidget {
@@ -23,9 +24,27 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreen extends State<DashboardScreen> {
   ApiProvider apiProvider = ApiProvider();
+
+  List<dynamic> featuresProductList = [];
+  featureProductData() async {
+    var resData = await apiProvider.getAllFeaturedProduct();
+    setState(() {
+      featuresProductList = resData!.data!;
+    });
+  }
+
+  List<dynamic> todayProductList = [];
+  todayProductData() async {
+    var resData = await apiProvider.getAllFeaturedProduct();
+    setState(() {
+      featuresProductList = resData!.data!;
+    });
+  }
+
   List<Data> categoryList = [];
   void categoryData() async {
     var resData = await apiProvider.getAllCategory();
+
     log(resData.data!.toString());
     setState(() {
       categoryList = resData!.data!;
@@ -33,9 +52,11 @@ class _DashboardScreen extends State<DashboardScreen> {
   }
 
   @override
-  void iniState() {
-    // categoryData();
+  void initState() {
     super.initState();
+    categoryData();
+    featureProductData();
+    todayProductData();
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -49,7 +70,7 @@ class _DashboardScreen extends State<DashboardScreen> {
     final _screenHeight = MediaQuery.of(context).size.height -
         kToolbarHeight -
         MediaQuery.of(context).padding.top;
-    print("categoryList ${categoryList}");
+    // print("categoryList ${categoryList}");
 
     return Scaffold(
       key: _scaffoldKey,
@@ -137,8 +158,6 @@ class _DashboardScreen extends State<DashboardScreen> {
                     Icons.notifications_active_outlined,
                   ),
                   onPressed: () {
-                    // print("categoryList ${categoryList}");
-                    categoryData();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -154,8 +173,7 @@ class _DashboardScreen extends State<DashboardScreen> {
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              // itemCount: myProducts.length,
-               itemCount: categoryList.length,
+              itemCount: categoryList.length,
               itemBuilder: (BuildContext context, int index) => Column(
                 children: [
                   Column(
@@ -165,13 +183,12 @@ class _DashboardScreen extends State<DashboardScreen> {
                         width: 80,
                         margin: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                            color: Color(0xff00C8B8),
+                            color: const Color(0xff00C8B8),
                             borderRadius: BorderRadius.circular(100),
                             border: Border.all(),
-                            image:  DecorationImage(
-                                image: NetworkImage(
-                                      "${ApiEndPoints.Storage+ categoryList[index].image!}"
-                                ))),
+                            image: DecorationImage(
+                                image: NetworkImage(ApiEndPoints.Storage +
+                                    categoryList[index].image!))),
                       ),
                       Text(
                         categoryList[index].name!,
@@ -299,9 +316,15 @@ class _DashboardScreen extends State<DashboardScreen> {
                   height: 276,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 10,
+                    itemCount: featuresProductList.length,
                     itemBuilder: (context, index) {
+                      var item = featuresProductList[index];
                       return CustomHomeProductCardWidget(
+                        mainPrice: item.price.toString(),
+                        price: "${item.price - int.parse(item.discount)}",
+                        slug: item.slug,
+                        thcRange: item.thcRange,
+                        titileText: item.name,
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -319,7 +342,6 @@ class _DashboardScreen extends State<DashboardScreen> {
 
           Container(
             height: _screenHeight * 0.45,
-            // color: Colors.red,
             margin: const EdgeInsets.all(12),
             child: Column(
               children: [
@@ -350,9 +372,23 @@ class _DashboardScreen extends State<DashboardScreen> {
                   height: 276,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 10,
+                    itemCount: featuresProductList.length,
                     itemBuilder: (context, index) {
-                      return const CustomTodayProductCardWidget();
+                      var item = featuresProductList[index];
+                      return CustomTodayProductCardWidget(
+                        mainPrice: item.price.toString(),
+                        price: "${item.price - int.parse(item.discount)}",
+                        slug: item.slug,
+                        thcRange: item.thcRange,
+                        titileText: item.name,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ProductWishListScreen()));
+                        },
+                      );
                     },
                   ),
                 ),
@@ -448,13 +484,29 @@ class _DashboardScreen extends State<DashboardScreen> {
                   ],
                 ),
                 SizedBox(
-                    height: 276,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 10,
-                        itemBuilder: (context, index) {
-                          return const CustomConcentrateCardWidget();
-                        })),
+                  height: 276,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: featuresProductList.length,
+                    itemBuilder: (context, index) {
+                      var item = featuresProductList[index];
+                      return CustomConcentrateCardWidget(
+                        mainPrice: item.price.toString(),
+                        price: "${item.price - int.parse(item.discount)}",
+                        slug: item.slug,
+                        thcRange: item.thcRange,
+                        titileText: item.name,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ProductWishListScreen()));
+                        },
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),
@@ -553,9 +605,23 @@ class _DashboardScreen extends State<DashboardScreen> {
                   height: 280,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 10,
+                    itemCount: featuresProductList.length,
                     itemBuilder: (context, index) {
-                      return const CustomConcentrateCardWidget();
+                      var item = featuresProductList[index];
+                      return CustomConcentrateCardWidget(
+                        mainPrice: item.price.toString(),
+                        price: "${item.price - int.parse(item.discount)}",
+                        slug: item.slug,
+                        thcRange: item.thcRange,
+                        titileText: item.name,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ProductWishListScreen()));
+                        },
+                      );
                     },
                   ),
                 )
@@ -566,7 +632,7 @@ class _DashboardScreen extends State<DashboardScreen> {
           Container(
             height: _screenHeight * 0.50,
             padding: const EdgeInsets.only(bottom: 15),
-            color: Color(0xFF00C8B8),
+            color: const Color(0xFF00C8B8),
             child: Column(
               children: [
                 Row(
@@ -600,9 +666,23 @@ class _DashboardScreen extends State<DashboardScreen> {
                   height: 276,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 10,
+                    itemCount: featuresProductList.length,
                     itemBuilder: (context, index) {
-                      return const CustomConcentrateCardWidget();
+                      var item = featuresProductList[index];
+                      return CustomConcentrateCardWidget(
+                        mainPrice: item.price.toString(),
+                        price: "${item.price - int.parse(item.discount)}",
+                        slug: item.slug,
+                        thcRange: item.thcRange,
+                        titileText: item.name,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ProductWishListScreen()));
+                        },
+                      );
                     },
                   ),
                 )
@@ -643,9 +723,23 @@ class _DashboardScreen extends State<DashboardScreen> {
                   height: 276,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 10,
+                    itemCount: featuresProductList.length,
                     itemBuilder: (context, index) {
-                      return const CustomConcentrateCardWidget();
+                      var item = featuresProductList[index];
+                      return CustomConcentrateCardWidget(
+                        mainPrice: item.price.toString(),
+                        price: "${item.price - int.parse(item.discount)}",
+                        slug: item.slug,
+                        thcRange: item.thcRange,
+                        titileText: item.name,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ProductWishListScreen()));
+                        },
+                      );
                     },
                   ),
                 )
@@ -694,7 +788,6 @@ class _DashboardScreen extends State<DashboardScreen> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
-                              //to set border radius to button
                               borderRadius: BorderRadius.circular(4)),
                           backgroundColor: const Color(0XFF00C8B8),
                         ),
@@ -746,9 +839,23 @@ class _DashboardScreen extends State<DashboardScreen> {
                   height: 276,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 10,
+                    itemCount: featuresProductList.length,
                     itemBuilder: (context, index) {
-                      return const CustomConcentrateCardWidget();
+                      var item = featuresProductList[index];
+                      return CustomConcentrateCardWidget(
+                        mainPrice: item.price.toString(),
+                        price: "${item.price - int.parse(item.discount)}",
+                        slug: item.slug,
+                        thcRange: item.thcRange,
+                        titileText: item.name,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ProductWishListScreen()));
+                        },
+                      );
                     },
                   ),
                 )

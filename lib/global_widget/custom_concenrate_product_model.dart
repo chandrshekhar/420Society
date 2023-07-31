@@ -1,11 +1,12 @@
-class FeaturedProducts {
+class ProductCategoryDealsModel {
   bool? success;
   String? message;
   List<Data>? data;
   String? errorMsg;
-  FeaturedProducts({this.success, this.message, this.data, this.errorMsg});
 
-  FeaturedProducts.fromJson(Map<String, dynamic> json) {
+  ProductCategoryDealsModel({this.success, this.message, this.data, this.errorMsg});
+
+  ProductCategoryDealsModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     message = json['message'];
     if (json['data'] != null) {
@@ -15,9 +16,10 @@ class FeaturedProducts {
       });
     }
   }
-  FeaturedProducts.withError(String errorMsg) {
+  ProductCategoryDealsModel.withError(String errorMsg) {
     errorMsg = errorMsg;
   }
+
 }
 
 class Data {
@@ -42,23 +44,23 @@ class Data {
 
   Data(
       {this.id,
-      this.categoryId,
-      this.sellerId,
-      this.name,
-      this.description,
-      this.specification,
-      this.price,
-      this.quantity,
-      this.discount,
-      this.thcRange,
-      this.slug,
-      this.metaTitle,
-      this.metaDescription,
-      this.status,
-      this.featureProduct,
-      this.todayDeals,
-      this.createdAt,
-      this.updatedAt});
+        this.categoryId,
+        this.sellerId,
+        this.name,
+        this.description,
+        this.specification,
+        this.price,
+        this.quantity,
+        this.discount,
+        this.thcRange,
+        this.slug,
+        this.metaTitle,
+        this.metaDescription,
+        this.status,
+        this.featureProduct,
+        this.todayDeals,
+        this.createdAt,
+        this.updatedAt});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -80,4 +82,6 @@ class Data {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
+
 }
+

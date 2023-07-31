@@ -1,11 +1,11 @@
-class FeaturedProducts {
+class TodaysDealsModel {
   bool? success;
   String? message;
   List<Data>? data;
   String? errorMsg;
-  FeaturedProducts({this.success, this.message, this.data, this.errorMsg});
+  TodaysDealsModel({this.success, this.message, this.data, this.errorMsg});
 
-  FeaturedProducts.fromJson(Map<String, dynamic> json) {
+  TodaysDealsModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     message = json['message'];
     if (json['data'] != null) {
@@ -15,7 +15,7 @@ class FeaturedProducts {
       });
     }
   }
-  FeaturedProducts.withError(String errorMsg) {
+  TodaysDealsModel.withError(String errorMsg) {
     errorMsg = errorMsg;
   }
 }
@@ -81,3 +81,7 @@ class Data {
     updatedAt = json['updated_at'];
   }
 }
+
+
+
+

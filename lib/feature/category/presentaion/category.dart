@@ -20,11 +20,11 @@ class _ProductCategoryScreen extends State<ProductCategoryScreen> {
 
   ApiProvider apiProvider = ApiProvider();
   List<Data> categoryList = [];
-  categoryData() async{
-     var resData = await apiProvider.getAllCategory();
-     setState(() {
-       categoryList = resData!.data!;
-     });
+  categoryData() async {
+    var resData = await apiProvider.getAllCategory();
+    setState(() {
+      categoryList = resData!.data!;
+    });
   }
 
   @override
@@ -138,22 +138,16 @@ class _ProductCategoryScreen extends State<ProductCategoryScreen> {
                         width: 80,
                         margin: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                            color: Color(0xff00C8B8),
+                            color: const Color(0xff00C8B8),
                             borderRadius: BorderRadius.circular(100),
-
                             border: Border.all(),
-                            image:  DecorationImage(
+                            image: DecorationImage(
                                 image: NetworkImage(
-                                    "${ApiEndPoints.Storage+ categoryList[index].image!}"
-                                ))),
+                                    ApiEndPoints.Storage + categoryList[index].image!))),
                       ),
-                      // const CircleAvatar(
-                      //   radius: 52,
-                      //   backgroundColor: Color(0xff00C8B8),
-                      // ),
                       const SizedBox(height: 10),
                       Text(
-                           categoryList[index].name!,
+                        categoryList[index].name!,
                         style: const TextStyle(
                             color: Color.fromARGB(255, 39, 8, 8), fontSize: 16),
                       ),
