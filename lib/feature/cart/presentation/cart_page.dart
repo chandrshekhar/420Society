@@ -5,6 +5,7 @@ import 'package:four20society/global_widget/custom_product_cart_widget.dart';
 import 'package:four20society/global_widget/app_drawar.dart';
 
 import '../../../global_widget/custom_product_card_cartpage.dart';
+
 class CardScreen extends StatefulWidget {
   const CardScreen({super.key});
 
@@ -13,12 +14,9 @@ class CardScreen extends StatefulWidget {
 }
 
 class _CardScreenState extends State<CardScreen> {
-   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    // final screenHeight = MediaQuery.of(context).size.height -
-    //     kToolbarHeight -
-    //     MediaQuery.of(context).padding.top;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -39,140 +37,143 @@ class _CardScreenState extends State<CardScreen> {
         ),
       ),
       drawer: customDrawer(context: context),
-
       body: Padding(
         padding: const EdgeInsets.all(3.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-          Expanded(
-            child: ListView.builder(
-                itemCount: 3,
-                itemBuilder: (BuildContext context, int index) {
-                  return const CustomProductCartCardWidget();
-                }
-            ),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-         const Text(
-            "Price Details",
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 18,
-            ),
-          ),
-      
-         const Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text("Discount"),
-              Spacer(),
-              Text(r'-$' + '50'),
-            ],
-          ),
-         const SizedBox(height: 5),
-       const   Row(
-            children: <Widget>[
-              Text("Price (1 item)"),
-              Spacer(),
-              Text(r'$' + '500'),
-            ],
-          ),
-           const SizedBox(height: 5),
-       const   Row(
-            children: <Widget>[
-              Text("Discount"),
-              Spacer(),
-              Text(r'-$' + '50'),
-            ],
-          ),
-           const SizedBox(height: 5),
-       const   Row(
-            children: <Widget>[
-              Text("Delivery Charges"),
-              Spacer(),
-              Text("Free Delivery"),
-            ],
-          ),
-      
-      
-       const   Divider(
-            color: Colors.black,
-          ),
-           const SizedBox(height: 5),
-        const  Row(
-            children: <Widget>[
-              Text("Total Amount",
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              Spacer(),
-              Text(r'$' + '500',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-            ],
-          ),
-        
-        const  Text("You will save 50 on this order",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.green)),
-           const SizedBox(height: 5),
-          Padding(
-            padding: const EdgeInsets.all(2.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+              Expanded(
+                child: ListView.builder(
+                    itemCount: 3,
+                    itemBuilder: (BuildContext context, int index) {
+                      return const CustomProductCartCardWidget();
+                    }),
               ),
-               padding:const EdgeInsets.only(left: 15, right: 10),
-              child: Row(
-                children: [
-                  const Flexible(
-                    child: TextField(
-                      decoration: InputDecoration(
-                          border: InputBorder.none, hintText: r'$' + '500', hintStyle: TextStyle(fontWeight: FontWeight.w500,  fontSize: 18, color: Colors.black)),
-                          ),
-                    ),
-                  Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                                primary:const Color(0xFF00C8B8),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                              ),
-                        onPressed: () {
-                          Navigator.push(context,MaterialPageRoute(builder: (context)=>const CheckoutPage()));
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back_ios,color: Colors.white,size: 16,
-                        ),
-                        label: const Text("Checkout", style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),),
-                        //.........
-                      ))
-      
+              const SizedBox(
+                height: 5,
+              ),
+              const Text(
+                "Price Details",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                ),
+              ),
+              const Row(
+                children: <Widget>[
+                  Text("Discount"),
+                  Spacer(),
+                  Text(r'-$' + '50'),
                 ],
               ),
-            ),
-      
-      
-      
-          ),
-        ]),
+              const SizedBox(height: 5),
+              const Row(
+                children: <Widget>[
+                  Text("Price (1 item)"),
+                  Spacer(),
+                  Text(r'$' + '500'),
+                ],
+              ),
+              const SizedBox(height: 5),
+              const Row(
+                children: <Widget>[
+                  Text("Discount"),
+                  Spacer(),
+                  Text(r'-$' + '50'),
+                ],
+              ),
+              const SizedBox(height: 5),
+              const Row(
+                children: <Widget>[
+                  Text("Delivery Charges"),
+                  Spacer(),
+                  Text("Free Delivery"),
+                ],
+              ),
+              const Divider(
+                color: Colors.black,
+              ),
+              const SizedBox(height: 5),
+              const Row(
+                children: <Widget>[
+                  Text("Total Amount",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Spacer(),
+                  Text(r'$' + '500',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                ],
+              ),
+              const Text("You will save 50 on this order",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.green)),
+              const SizedBox(height: 5),
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                  ),
+                  padding: const EdgeInsets.only(left: 15, right: 10),
+                  child: Row(
+                    children: [
+                      const Flexible(
+                        child: TextField(
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: r'$' + '500',
+                              hintStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
+                                  color: Colors.black)),
+                        ),
+                      ),
+                      Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              primary: const Color(0xFF00C8B8),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const CheckoutPage()));
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.white,
+                              size: 16,
+                            ),
+                            label: const Text(
+                              "Checkout",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            //.........
+                          ))
+                    ],
+                  ),
+                ),
+              ),
+            ]),
       ),
     );
   }
 
-  Widget productCard(double _screenHeight){
-    return  Container(
+  Widget productCard(double _screenHeight) {
+    return Container(
       margin: const EdgeInsets.all(12),
       height: _screenHeight * 0.3,
       decoration: BoxDecoration(
-          color: Colors.grey.shade100,
-          borderRadius: BorderRadius.circular(12)),
+          color: Colors.grey.shade100, borderRadius: BorderRadius.circular(12)),
       child: Column(children: [
         Row(
           children: [
@@ -182,15 +183,15 @@ class _CardScreenState extends State<CardScreen> {
               height: _screenHeight * 0.12,
               decoration: BoxDecoration(
                 color: Colors.yellow,
-                
-                  borderRadius: BorderRadius.circular(12),
-                  
-                  // image: const DecorationImage(
-                  //   fit: BoxFit.fill,
-                  //   image: AssetImage(
-                  //       "assets/img/logo.png"),
-                  // )
-                  ),
+
+                borderRadius: BorderRadius.circular(12),
+
+                // image: const DecorationImage(
+                //   fit: BoxFit.fill,
+                //   image: AssetImage(
+                //       "assets/img/logo.png"),
+                // )
+              ),
             ),
             Container(
               margin: const EdgeInsets.all(6),
@@ -202,59 +203,61 @@ class _CardScreenState extends State<CardScreen> {
                   children: [
                     const Text(
                       "Organic hemp flower Organic hemp flower ",
-                      style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
                     Row(
                       children: [
                         Container(
-
-                          width: MediaQuery.of(context).size.width *
-                              0.32,
+                          width: MediaQuery.of(context).size.width * 0.32,
                           child: Text("details"),
                         ),
                         Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                BorderRadius.circular(8),
-                                border: Border.all(
-                                    color: const Color(0xff00C8B8),
-                                    width: 1)),
-                            width: MediaQuery.of(context).size.width *
-                                0.18,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                GestureDetector(
-                                  onTap: (){
-                                    print("plus pressed ----");
-                                  },
-                                  child: const Icon(Icons.add, size: 18, color: Color(0xff00C8B8),),
+                          padding: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                  color: const Color(0xff00C8B8), width: 1)),
+                          width: MediaQuery.of(context).size.width * 0.18,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  print("plus pressed ----");
+                                },
+                                child: const Icon(
+                                  Icons.add,
+                                  size: 18,
+                                  color: Color(0xff00C8B8),
                                 ),
-                                const Text("1", style: TextStyle(fontSize: 14, color: Color(0xFF00C8B8)),),
-                                GestureDetector(
-                                  onTap: (){
-                                    print("minus pressed ----");
-                                  },
-                                  child: const Icon(Icons.remove, size: 18, color: Color(0xff00C8B8), ),
+                              ),
+                              const Text(
+                                "1",
+                                style: TextStyle(
+                                    fontSize: 14, color: Color(0xFF00C8B8)),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  print("minus pressed ----");
+                                },
+                                child: const Icon(
+                                  Icons.remove,
+                                  size: 18,
+                                  color: Color(0xff00C8B8),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
-
                     ),
                     Container(
-
-                      width: MediaQuery.of(context).size.width *
-                          0.70,
+                      width: MediaQuery.of(context).size.width * 0.70,
                       child: Text("abc"),
                     ),
-
                   ],
                 ),
               ),
@@ -262,7 +265,7 @@ class _CardScreenState extends State<CardScreen> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 0, bottom: 4, left: 6, right:6),
+          padding: const EdgeInsets.only(top: 0, bottom: 4, left: 6, right: 6),
           child: Expanded(
             child: Row(
               children: [
@@ -272,8 +275,7 @@ class _CardScreenState extends State<CardScreen> {
                 Expanded(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00C8B8)
-                    ),
+                        backgroundColor: const Color(0xFF00C8B8)),
                     child: const Text("Move to Wishlist"),
                     onPressed: () {},
                   ),
@@ -284,12 +286,11 @@ class _CardScreenState extends State<CardScreen> {
                 Expanded(
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      foregroundColor:const  Color(0XFF00C8B8),
+                      foregroundColor: const Color(0XFF00C8B8),
                       side: const BorderSide(
                         color: Color(0XFF00C8B8),
                         width: 2,
                       ),
-
                     ),
                     child: const Text("Add to Cart"),
                     onPressed: () {},
@@ -302,13 +303,9 @@ class _CardScreenState extends State<CardScreen> {
             ),
           ),
         ),
-
-
-
       ]),
 
       //
     );
-
   }
 }

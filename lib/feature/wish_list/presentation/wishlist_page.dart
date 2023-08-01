@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:four20society/global_widget/custom_product_cart_widget.dart';
 import '../../../global_widget/app_drawar.dart';
+import '../../../utils/Api/api_calling/api_provider.dart';
+import '../../dashboard/presentation/dashboards.dart';
+
 class ProductWishListScreen extends StatefulWidget {
   const ProductWishListScreen({super.key});
   @override
@@ -8,6 +11,23 @@ class ProductWishListScreen extends StatefulWidget {
 }
 
 class _ProductWishListScreen extends State<ProductWishListScreen> {
+  ApiProvider apiProvider = ApiProvider();
+
+  List<dynamic> wishlistProduct = [];
+  getAllWishlistByCategory() async {
+    var resData = await apiProvider.getAllWishlist();
+    setState(() {
+      wishlistProduct = resData!.data!;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    getAllWishlistByCategory();
+  }
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -26,22 +46,38 @@ class _ProductWishListScreen extends State<ProductWishListScreen> {
         ),
         leading: GestureDetector(
           onTap: () {
-            _scaffoldKey.currentState!.openDrawer();
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const DashboardScreen()));
+            // _scaffoldKey.currentState!.openDrawer();
           },
           child: const Icon(
-            Icons.menu,
+            Icons.arrow_back,
             color: Colors.black,
           ),
         ),
       ),
       body: ListView.builder(
-          itemCount: 5,
+          itemCount: wishlistProduct.length,
           itemBuilder: (BuildContext context, int index) {
-            return const CustomProductCardWidget();
+            var item = wishlistProduct[index];
+            return CustomProductCardWidget(
+              mainPrice: item.price.toString(),
+              price: "${item.price - int.parse(item.discount)}",
+              slug: item.slug,
+              titileText: item.name,
+              description: item.description,
+              thcRange: item.thcRange,
+              onTap: ()async{
+                Map<String, dynamic> formData = {
+                  "product_id": item.id.toString()
+                };
+                await ApiProvider().addProductList(formData);
 
+              },
+            );
           }),
     );
   }
-
- 
 }

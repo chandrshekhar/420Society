@@ -23,7 +23,7 @@ mixin ApiHelper {
     if (kDebugMode) {
       print(url.toString());
       print(queryParameters);
-      print("token pandey ${token}");
+      print("token pandey $token");
       // print(uId);
     }
     try {

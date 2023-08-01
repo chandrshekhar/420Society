@@ -1,12 +1,34 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:four20society/global_widget/custom_button.dart';
-
+import 'package:four20society/utils/Api/api_calling/api_provider.dart';
 import 'custom_bordered_button.dart';
 import 'custom_unbordered_button.dart';
 
-class CustomProductCardWidget extends StatelessWidget {
-  const CustomProductCardWidget({super.key});
+class CustomProductCardWidget extends StatefulWidget {
+  final VoidCallback? onPressed;
+  final String titileText;
+  final String price;
+  final String mainPrice;
+  final String slug;
+  final String description;
+  final String thcRange;
+  final VoidCallback onTap;
+  const CustomProductCardWidget(
+      {super.key,
+      this.onPressed,
+      required this.mainPrice,
+      required this.price,
+      required this.slug,
+      required this.titileText,
+      required this.description,
+      required this.thcRange, required this.onTap});
 
+  @override
+  State<CustomProductCardWidget> createState() =>
+      _CustomProductCardWidgetState();
+}
+
+class _CustomProductCardWidgetState extends State<CustomProductCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,88 +52,119 @@ class CustomProductCardWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 15),
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
                   width: 180,
                   child: Text(
-                    "Organic hemp flower Organic hemp flower ",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    widget.titileText,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
                 ),
                 Text(
-                  "\$152",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  "\$ ${widget.price}",
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "abc",
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                  "${widget.thcRange}% THC",
+                  style: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w400),
                 ),
-                Text("xyz",
-                    style:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+                Text(widget.slug,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      overflow: TextOverflow.ellipsis,
+                    )),
               ],
             ),
           ],
         ),
+
         //buttons
         const SizedBox(height: 10),
-
         Row(
-
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // ElevatedButton(
-            //   style: ElevatedButton.styleFrom(
-            //     maximumSize:  const Size(double .infinity, double.infinity),
-            //     shape: RoundedRectangleBorder(
-            //
-            //         borderRadius: BorderRadius.circular(4)),
-            //     backgroundColor: const Color(0XFF00C8B8),
-            //   ),
-            //   onPressed: () {},
-            //   child: const Text(
-            //     "Add To cart",
-            //     style: TextStyle(
-            //       color: Colors.white,
-            //       fontSize: 18,
-            //     ),
-            //   ),
-            // ),
+            CustomUnBorderedElevatedButton(
 
-           //  CustomElevatedButton(onTap: () {  }, title: 'Add To Cart',
-           //  ),
-           // const  Padding(padding:  EdgeInsets.all(20)),
-           //  CustomElevatedButton(onTap: () {  }, title: 'Add To Cart',),
-
-            CustomUnBorderedElevatedButton(onTap: () {  }, title: 'Add To Cart',),
-            CustomBorderedElevatedButton(onTap: () {  }, title: 'Remove',
-
+              onTap: widget.onTap,
+              title: 'Add To Cart',
             ),
-
-            // ElevatedButton(
-            //   style: ElevatedButton.styleFrom(
-            //     shape: RoundedRectangleBorder(
-            //       //to set border radius to button
-            //         borderRadius: BorderRadius.circular(4)),
-            //     backgroundColor: const Color(0XFF00C8B8),
-            //   ),
-            //   onPressed: () {},
-            //   child: const Text(
-            //     "Remove",
-            //     style: TextStyle(
-            //       color: Colors.red,
-            //       fontSize: 16,
-            //     ),
-            //   ),
-            // ),
+            CustomBorderedElevatedButton(
+              onTap: () {},
+              title: 'Remove',
+            ),
           ],
         ),
       ]),
     );
   }
 }
+
+//increment decrement button (code)
+
+// const SizedBox(width: 105),
+// Row(
+// mainAxisAlignment: MainAxisAlignment.spaceBetween,
+// // crossAxisAlignment: CrossAxisAlignment.center,
+// children: [
+// Text(
+// // "57%",
+// "${widget.thcRange}% THC",
+// style:const  TextStyle(
+// fontSize: 14, fontWeight: FontWeight.w400),
+// ),
+// const SizedBox(width: 60),
+// Container(
+// padding: const EdgeInsets.all(4),
+// decoration: BoxDecoration(
+// borderRadius: BorderRadius.circular(8),
+// border: Border.all(
+// color: const Color(0xff00C8B8), width: 1)),
+// width: MediaQuery.of(context).size.width * 0.18,
+// child: Row(
+// mainAxisAlignment: MainAxisAlignment.spaceBetween,
+// children: [
+// GestureDetector(
+// onTap: () {
+// print("plus pressed ----");
+// },
+// child: const Icon(
+// Icons.add,
+// size: 18,
+// color: Color(0xff00C8B8),
+// ),
+// ),
+// const Text(
+// "1",
+// style: TextStyle(
+// fontSize: 14, color: Color(0xFF00C8B8)),
+// ),
+// GestureDetector(
+// onTap: () {
+// print("minus pressed ----");
+// },
+// child: const Icon(
+// Icons.remove,
+// size: 18,
+// color: Color(0xff00C8B8),
+// ),
+// ),
+// ],
+// ),
+// ),
+// ]),
+
+
+
+
+
+
+

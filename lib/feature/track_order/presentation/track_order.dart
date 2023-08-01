@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:four20society/global_widget/custom_product_cart_widget.dart';
+
+import '../../../global_widget/custom_product_Track_cart_widget.dart';
 class TrackOrderPage extends StatefulWidget {
   const TrackOrderPage({super.key});
 
@@ -35,7 +37,7 @@ class _TrackOrderPage extends State<TrackOrderPage> {
             itemCount: 5,
             shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) {
-              return const CustomProductCardWidget();
+              return  CustomProductTrackCardWidget();
             }
           
         ),

@@ -4,17 +4,34 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:four20society/feature/change_password/presentation/change_password%20(1).dart';
 import 'package:four20society/feature/profile/presentaion/personalDetails.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import '../../../global_widget/app_drawar.dart';
+import '../../../utils/Api/api_calling/api_provider.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
+
 
   @override
   State<UserProfileScreen> createState() => _UserProfileScreen();
 }
 
 class _UserProfileScreen extends State<UserProfileScreen> {
+
+  // ApiProvider apiProvider = ApiProvider();
+  // List<dynamic> wishlistProduct = [];
+  // getProfile() async {
+  //   var resData = await apiProvider.getAllWishlist();
+  //   setState(() {
+  //     wishlistProduct = resData!.data!;
+  //   });
+  // }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //
+  //   getProfile();
+  // }
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   File? image;
@@ -30,12 +47,7 @@ class _UserProfileScreen extends State<UserProfileScreen> {
     }
   }
 
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   BlocProvider.of<UserProfileBloc>(context).add(FetchProfileEvent());
-  // }
+
 
   @override
   Widget build(BuildContext context) {

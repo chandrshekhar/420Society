@@ -15,4 +15,6 @@ class ApiEndPoints{
   static const String featuredProduct="${BASE_URL}api/v1/home/featured-product";
   static const String todayDeals = "${BASE_URL}api/v1/home/today-deals";
   static const String productCategory="${BASE_URL}api/v1/home/product-by-category";
+  static const String wishlistProduct="${BASE_URL}api/v1/wishlist/list";
+  static const String addWishList="${BASE_URL}api/v1/wishlist/add";
 }

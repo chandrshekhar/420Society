@@ -20,7 +20,7 @@ class _HomePageWithBottomBarState extends State<HomePageWithBottomBar> {
     const DashboardScreen(),
     const ProductCategoryScreen(),
     const CardScreen(),
-    const ProductWishListScreen(),
+     ProductWishListScreen(),
     const UserProfileScreen(),
   ];
   @override

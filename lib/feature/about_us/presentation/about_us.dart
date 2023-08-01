@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class AboutUsPage extends StatefulWidget {
   const AboutUsPage({super.key});
@@ -42,11 +41,11 @@ class _AboutUsPage extends State<AboutUsPage> {
               margin: const EdgeInsets.only(bottom: 10, top: 10),
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 211, 209, 209).withOpacity(0.2),
+                color: const Color.fromARGB(255, 211, 209, 209).withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
               width: MediaQuery.of(context).size.width * 0.9,
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

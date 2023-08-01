@@ -11,6 +11,7 @@ import '../../../global_widget/custom_concenrate_product.dart';
 import '../../../global_widget/custom_home_product_card.dart';
 import '../../../global_widget/custom_todays_deal_product_cart.dart';
 import '../../category/model/category_model.dart';
+import '../../product/presentation/product_page.dart';
 import '../../wish_list/presentation/wishlist_page.dart';
 
 import 'package:http/http.dart' as http;
@@ -330,7 +331,9 @@ class _DashboardScreen extends State<DashboardScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const ProductWishListScreen()));
+                                   // const ProductScreen()
+                                      const ProductWishListScreen()
+                              ));
                         },
                       );
                     },
@@ -386,7 +389,7 @@ class _DashboardScreen extends State<DashboardScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const ProductWishListScreen()));
+                                       const ProductWishListScreen()));
                         },
                       );
                     },
@@ -501,7 +504,7 @@ class _DashboardScreen extends State<DashboardScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const ProductWishListScreen()));
+                                       const ProductWishListScreen()));
                         },
                       );
                     },
@@ -619,7 +622,7 @@ class _DashboardScreen extends State<DashboardScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const ProductWishListScreen()));
+                                       const ProductWishListScreen()));
                         },
                       );
                     },
@@ -680,7 +683,7 @@ class _DashboardScreen extends State<DashboardScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const ProductWishListScreen()));
+                                       const ProductWishListScreen()));
                         },
                       );
                     },
@@ -737,7 +740,7 @@ class _DashboardScreen extends State<DashboardScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const ProductWishListScreen()));
+                                       const ProductWishListScreen()));
                         },
                       );
                     },
@@ -853,7 +856,7 @@ class _DashboardScreen extends State<DashboardScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const ProductWishListScreen()));
+                                       const ProductWishListScreen()));
                         },
                       );
                     },
