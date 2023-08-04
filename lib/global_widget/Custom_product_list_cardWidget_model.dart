@@ -1,22 +1,17 @@
-class WishListModel {
-  bool? status;
+class ProductModel {
   String? message;
-  List<Data>? data;
+  bool? status;
+  Data? data;
   String? errorMsg;
-  WishListModel({this.status, this.message, this.data, this.errorMsg});
 
-  WishListModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
+  ProductModel({this.message, this.status, this.data, this.errorMsg});
+
+  ProductModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
-      });
-    }
+    status = json['status'];
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
-
-  WishListModel.withError(String errorMsg) {
+  ProductModel.withError(String errorMsg) {
     errorMsg = errorMsg;
   }
 }

@@ -8,7 +8,7 @@ class IntroOneScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 5)).then((val) {
+    Future.delayed(const Duration(seconds: 0)).then((val) {
       Navigator.pushNamedAndRemoveUntil(
           context, AppRoute.intro2Screen, (route) => false);
     });

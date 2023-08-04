@@ -1,14 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:four20society/constants/colors/app_colors.dart';
-import 'package:four20society/constants/routes/routes_name.dart';
+import 'package:four20society/feature/auth/login/presentaion/login_screen.dart';
+import '../../global_widget/bottom_nav.dart';
+import '../../utils/local_storage/local_storage.dart';
 
-class SplaceScreen extends StatelessWidget {
+class SplaceScreen extends StatefulWidget {
   const SplaceScreen({super.key});
+
+  @override
+  State<SplaceScreen> createState() => _SplaceScreenState();
+}
+
+class _SplaceScreenState extends State<SplaceScreen> {
+  String userToken = "";
+  void getTokenId()async{
+    final token = await LocalStorageService().getFromDisk(
+        LocalStorageService.ACCESS_TOKEN_KEY) ??
+        "";
+    setState(() {
+      userToken = token;
+    });
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getTokenId();
+  }
   @override
   Widget build(BuildContext context) {
+
     Future.delayed(const Duration(seconds: 5)).then((val) {
-      Navigator.pushNamedAndRemoveUntil(
-          context, AppRoute.intro1Screen, (route) => false);
+    Navigator.push(context, MaterialPageRoute(builder: (_)=> userToken.isNotEmpty && userToken!=null && userToken != ""? const HomePageWithBottomBar(): const LoginScreen()));
     });
     return Scaffold(
         body: Center(

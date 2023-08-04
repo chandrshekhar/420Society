@@ -6,11 +6,9 @@ import 'package:four20society/feature/notification/presentation/notification_scr
 import 'package:four20society/feature/track_order/presentation/track_order.dart';
 import '../feature/payment/presentation/paymentcard.dart';
 
-
 Widget customDrawer({required context}) {
   final mediaQuery = MediaQuery.of(context);
   return Container(
-    // padding: EdgeInsets.only(top: _mediaQuery.viewPadding.top),
     width: mediaQuery.size.width * 0.75,
     decoration: const BoxDecoration(
         color: Colors.white,
@@ -148,7 +146,10 @@ Widget customDrawer({required context}) {
                         ListTile(
                           onTap: () {
                             Navigator.pop(context);
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const PaymentCard()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const PaymentCard()));
                           },
                           title: const Text(
                             "Payment Method",
@@ -276,135 +277,3 @@ Widget customDrawer({required context}) {
     ),
   );
 }
-// enum SingingCharacter { lafayette, jefferson } //new
-// class PaymentCard extends StatefulWidget {
-//   const PaymentCard({Key? key}) : super(key: key);
-//
-//   @override
-//   State<PaymentCard> createState() => _PaymentCard();
-// }
-
-// class _PaymentCard extends State<PaymentCard> {
-//   SingingCharacter? _character = SingingCharacter.lafayette;
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text("Payment Method"),
-//         centerTitle: true,
-//         backgroundColor: Colors.white,
-//         elevation: 0,
-//         leading: IconButton(
-//           onPressed: () {
-//             Navigator.pop(context);
-//           },
-//           icon: const Icon(
-//             Icons.arrow_back_ios,
-//             color: Colors.black,
-//           ),
-//         ),
-//       ),
-//       body: Column(
-//         children: [
-//           Container(
-//             margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-//             padding: const EdgeInsets.only(
-//                 top: 0, bottom: 0, left: 10, right: 10),
-//             decoration: BoxDecoration(
-//               color: const Color.fromARGB(255, 211, 209, 209).withOpacity(0.4),
-//               borderRadius: BorderRadius.circular(8),
-//             ),
-//             width: MediaQuery.of(context).size.width * 0.9,
-//             child: Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               crossAxisAlignment: CrossAxisAlignment.center,
-//               children: [
-//                 ListTile(
-//                   onTap: () {
-//                     Navigator.pop(context);
-//                     Navigator.push(
-//                         context,
-//                         MaterialPageRoute(
-//                             builder: (context) => const AboutUsPage()));
-//                   },
-//                   title: const Text(
-//                     "Add New Card",
-//                     style: TextStyle(
-//                         fontSize: 15,
-//                         fontWeight: FontWeight.normal,
-//                         color: Colors.black),
-//                   ),
-//                 ),
-//                 ListTile(
-//                   onTap: () {
-//                     Navigator.pop(context);
-//                     Navigator.push(
-//                         context,
-//                         MaterialPageRoute(
-//                             builder: (_) => const AboutUsPage()));
-//                   },
-//                   title: const Text(
-//                     "Add New Bank Account",
-//                     style: TextStyle(
-//                         fontSize: 15,
-//                         fontWeight: FontWeight.normal,
-//                         color: Colors.black),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//           Container(
-//             margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-//             padding: const EdgeInsets.only(
-//                 top: 0, bottom: 0, left: 10, right: 10),
-//             decoration: BoxDecoration(
-//               color: const Color.fromARGB(255, 211, 209, 209).withOpacity(0.4),
-//               borderRadius: BorderRadius.circular (8), //new
-//             ),
-//             width: MediaQuery.of(context).size.width * 0.9,
-//              child: Column(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 crossAxisAlignment: CrossAxisAlignment.center,
-//                 children: [
-//                   ListTile(
-//                     onTap: () {
-//                       Navigator.pop(context);
-//                       Navigator.push(
-//                           context,
-//                           MaterialPageRoute(
-//                               builder: (context) => const AboutUsPage()));
-//                     },
-//                     title: const Text(
-//                       "Add New Card",
-//                       style: TextStyle(
-//                           fontSize: 15,
-//                           fontWeight: FontWeight.normal,
-//                           color: Colors.black),
-//                     ),
-//                   ),
-//                   ListTile(
-//                     onTap: () {
-//                       Navigator.pop(context);
-//                       Navigator.push(
-//                           context,
-//                           MaterialPageRoute(
-//                               builder: (_) => const AboutUsPage()));
-//                     },
-//                     title: const Text(
-//                       "Add New Bank Account",
-//                       style: TextStyle(
-//                           fontSize: 15,
-//                           fontWeight: FontWeight.normal,
-//                           color: Colors.black),
-//                     ),
-//                   ),
-//                 ],
-//               ),  //new child
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-//

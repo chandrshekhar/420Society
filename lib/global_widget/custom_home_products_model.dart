@@ -18,6 +18,7 @@ class FeaturedProducts {
   FeaturedProducts.withError(String errorMsg) {
     errorMsg = errorMsg;
   }
+
 }
 
 class Data {
@@ -39,26 +40,28 @@ class Data {
   int? todayDeals;
   String? createdAt;
   String? updatedAt;
+  List<FeaturedImage>? featuredImage;
 
   Data(
       {this.id,
-      this.categoryId,
-      this.sellerId,
-      this.name,
-      this.description,
-      this.specification,
-      this.price,
-      this.quantity,
-      this.discount,
-      this.thcRange,
-      this.slug,
-      this.metaTitle,
-      this.metaDescription,
-      this.status,
-      this.featureProduct,
-      this.todayDeals,
-      this.createdAt,
-      this.updatedAt});
+        this.categoryId,
+        this.sellerId,
+        this.name,
+        this.description,
+        this.specification,
+        this.price,
+        this.quantity,
+        this.discount,
+        this.thcRange,
+        this.slug,
+        this.metaTitle,
+        this.metaDescription,
+        this.status,
+        this.featureProduct,
+        this.todayDeals,
+        this.createdAt,
+        this.updatedAt,
+        this.featuredImage});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -79,5 +82,23 @@ class Data {
     todayDeals = json['today_deals'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    if (json['featured_image'] != null) {
+      featuredImage = <FeaturedImage>[];
+      json['featured_image'].forEach((v) {
+        featuredImage!.add(FeaturedImage.fromJson(v));
+      });
+    }
+  }
+}
+
+class FeaturedImage {
+  int? id;
+  int? productId;
+  String? image;
+  FeaturedImage({this.id, this.productId, this.image});
+  FeaturedImage.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    productId = json['product_id'];
+    image = json['image'];
   }
 }

@@ -8,9 +8,11 @@ import 'package:four20society/constants/routes/routes_name.dart';
 import 'package:four20society/global_widget/bottom_nav.dart';
 import 'package:four20society/global_widget/custom_button.dart';
 import 'package:four20society/global_widget/input_fields.dart';
+import 'package:four20society/utils/Api/api_calling/api_provider.dart';
 import 'package:http/http.dart';
 
 import '../../../../utils/Toast/app_toast.dart';
+import '../../../../utils/local_storage/local_storage.dart';
 import '../../../dashboard/presentation/dashboards.dart';
 import '../bloc/seller_login_bloc.dart';
 
@@ -27,13 +29,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   List<String> radioList = ["lbl_seller", "lbl_customer"];
 
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-      key: _formKey,
       children: [
         SizedBox(
             height: MediaQuery.of(context).size.height,
@@ -51,7 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       topLeft: Radius.circular(214),
                       topRight: Radius.circular(214))),
               child: Form(
-                key: _formKey,
                 child: Column(
                   children: [
                     const Text("Welcome again!",
@@ -97,51 +95,26 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 90),
-                    BlocListener<LoginBloc, LoginState>(
-                      listener: (context, state) {
-                        // print("state --> $state");
-                        if (state is LoginLoadedState) {
-                          ToastMessage().toast(
-                              context: context,
-                              message: state.responseModel.message.toString(),
-                              messageColor: Colors.white,
-                              background: Colors.green);
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-
-                                      const HomePageWithBottomBar()),
-                              (route) => false);
-                        } else if (state is LoginErrorState) {
-                          ToastMessage().toast(
-                              duration: 5000,
-                              context: context,
-                              message: state.errorMsg.toString(),
-                              messageColor: Colors.white,
-                              background: Colors.redAccent);
+                    CustomElevatedButton(
+                      onTap: () async {
+                        ApiProvider apiProvider = ApiProvider();
+                        Map<String, dynamic> reqModel = {
+                          "email": emailController.text.trim(),
+                          "password": passwordController.text.trim(),
+                          "user_type": "Seller"
+                        };
+                        var response = await apiProvider.login(reqModel);
+                        final token = await LocalStorageService().saveToDisk(
+                                LocalStorageService.ACCESS_TOKEN_KEY,response.data!.authToken) ??
+                            "";
+                        if(response.data!.user!=null){
+                          Navigator.push(context, MaterialPageRoute(builder: (_)=> DashboardScreen()));
+                        }else if (response.status==false){
+                            SnackBar(content:Text( "Email or password incorrect"));
                         }
                       },
-                      child: CustomElevatedButton(
-                        onTap: () {
-                          if (_formKey.currentState!.validate()) {
-                            BlocProvider.of<LoginBloc>(context).add(LoginEvents(
-                                email: emailController.text.trim(),
-                                password: passwordController.text.trim(),
-                                user_type: 'Seller'
-                            ));
-                          }
-                        },
-                        // onTap:() {
-                        //    Navigator.push(
-                        //        context,
-                        //        MaterialPageRoute(
-                        //            builder: (context) =>
-                        //            const HomePageWithBottomBar()));
-                        //  },
-                        title: "LOGIN",
-                        color: AppColors.buttonColor,
-                      ),
+                      title: "LOGIN",
+                      color: AppColors.buttonColor,
                     ),
                     const SizedBox(height: 21),
                     RichText(

@@ -63,6 +63,7 @@ class _ProductWishListScreen extends State<ProductWishListScreen> {
           itemBuilder: (BuildContext context, int index) {
             var item = wishlistProduct[index];
             return CustomProductCardWidget(
+              image:item.featuredImage![0].image??"",
               mainPrice: item.price.toString(),
               price: "${item.price - int.parse(item.discount)}",
               slug: item.slug,

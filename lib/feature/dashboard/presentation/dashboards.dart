@@ -1,20 +1,16 @@
-import 'dart:convert';
 import 'dart:developer';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:four20society/feature/notification/presentation/notification_screen.dart';
 import 'package:four20society/global_widget/app_drawar.dart';
+import 'package:four20society/global_widget/custom_home_products_model.dart';
 import 'package:four20society/utils/Api/api_calling/api_provider.dart';
 import '../../../constants/apis_path/api_config_string.dart';
 import '../../../global_widget/custom_concenrate_product.dart';
 import '../../../global_widget/custom_home_product_card.dart';
 import '../../../global_widget/custom_todays_deal_product_cart.dart';
-import '../../category/model/category_model.dart';
 import '../../product/presentation/product_page.dart';
 import '../../wish_list/presentation/wishlist_page.dart';
-
-import 'package:http/http.dart' as http;
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -26,11 +22,23 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreen extends State<DashboardScreen> {
   ApiProvider apiProvider = ApiProvider();
 
-  List<dynamic> featuresProductList = [];
+  FeaturedProducts featuredProducts = FeaturedProducts();
+  List<dynamic> featureList = [];
   featureProductData() async {
     var resData = await apiProvider.getAllFeaturedProduct();
     setState(() {
-      featuresProductList = resData!.data!;
+      featuredProducts = resData!;
+      featureList = resData.data!;
+    });
+  }
+
+  List<dynamic> categoryList = [];
+  void categoryData() async {
+    var resData = await apiProvider.getAllCategory();
+
+    log(resData.data!.toString());
+    setState(() {
+      categoryList = resData!.data!;
     });
   }
 
@@ -38,17 +46,7 @@ class _DashboardScreen extends State<DashboardScreen> {
   todayProductData() async {
     var resData = await apiProvider.getAllFeaturedProduct();
     setState(() {
-      featuresProductList = resData!.data!;
-    });
-  }
-
-  List<Data> categoryList = [];
-  void categoryData() async {
-    var resData = await apiProvider.getAllCategory();
-
-    log(resData.data!.toString());
-    setState(() {
-      categoryList = resData!.data!;
+      todayProductList = resData!.data!;
     });
   }
 
@@ -71,7 +69,6 @@ class _DashboardScreen extends State<DashboardScreen> {
     final _screenHeight = MediaQuery.of(context).size.height -
         kToolbarHeight -
         MediaQuery.of(context).padding.top;
-    // print("categoryList ${categoryList}");
 
     return Scaffold(
       key: _scaffoldKey,
@@ -171,36 +168,41 @@ class _DashboardScreen extends State<DashboardScreen> {
 
           SizedBox(
             height: 115.0,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: categoryList.length,
-              itemBuilder: (BuildContext context, int index) => Column(
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        height: 80,
-                        width: 80,
-                        margin: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            color: const Color(0xff00C8B8),
-                            borderRadius: BorderRadius.circular(100),
-                            border: Border.all(),
-                            image: DecorationImage(
-                                image: NetworkImage(ApiEndPoints.Storage +
-                                    categoryList[index].image!))),
-                      ),
-                      Text(
-                        categoryList[index].name!,
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 39, 8, 8), fontSize: 16),
-                      ),
-                    ],
+            child: categoryList.isNotEmpty
+                ? ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: categoryList.length,
+                    itemBuilder: (BuildContext context, int index) => Column(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              height: 80,
+                              width: 80,
+                              margin: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                  color: const Color(0xff00C8B8),
+                                  borderRadius: BorderRadius.circular(100),
+                                  border: Border.all(),
+                                  image: DecorationImage(
+                                      image: NetworkImage(ApiEndPoints.Storage +
+                                          categoryList[index].image??""))),
+                            ),
+                            Text(
+                              categoryList[index].name??"",
+                              style: const TextStyle(
+                                  color: Color.fromARGB(255, 39, 8, 8),
+                                  fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                : const Center(
+                    child: CircularProgressIndicator.adaptive(),
                   ),
-                ],
-              ),
-            ),
           ),
 
           Container(
@@ -315,29 +317,35 @@ class _DashboardScreen extends State<DashboardScreen> {
                 ),
                 SizedBox(
                   height: 276,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: featuresProductList.length,
-                    itemBuilder: (context, index) {
-                      var item = featuresProductList[index];
-                      return CustomHomeProductCardWidget(
-                        mainPrice: item.price.toString(),
-                        price: "${item.price - int.parse(item.discount)}",
-                        slug: item.slug,
-                        thcRange: item.thcRange,
-                        titileText: item.name,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                   // const ProductScreen()
-                                      const ProductWishListScreen()
-                              ));
-                        },
-                      );
-                    },
-                  ),
+                  child: featureList.isNotEmpty
+                      ? ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: featureList.length,
+                          itemBuilder: (context, index) {
+                            var item = featureList[index];
+                            return CustomHomeProductCardWidget(
+                              mainPrice: item.price == null? "" : item.price.toString(),
+                              price:
+                                  "",
+                              slug: item.slug ?? "",
+                              thcRange: item.thcRange ?? "",
+                              titileText: item.name ?? "",
+                              image: item.featuredImage![0].image ?? "",
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProductScreen()
+                                        // const ProductWishListScreen()
+                                        ));
+                              },
+                            );
+                          },
+                        )
+                      : const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        ),
                 ),
               ],
             ),
@@ -373,27 +381,34 @@ class _DashboardScreen extends State<DashboardScreen> {
                 ),
                 SizedBox(
                   height: 276,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: featuresProductList.length,
-                    itemBuilder: (context, index) {
-                      var item = featuresProductList[index];
-                      return CustomTodayProductCardWidget(
-                        mainPrice: item.price.toString(),
-                        price: "${item.price - int.parse(item.discount)}",
-                        slug: item.slug,
-                        thcRange: item.thcRange,
-                        titileText: item.name,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                       const ProductWishListScreen()));
-                        },
-                      );
-                    },
-                  ),
+                  child: todayProductList.isNotEmpty
+
+                      ? ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: todayProductList.length,
+                          itemBuilder: (context, index) {
+                            var item = todayProductList[index];
+                            return CustomTodayProductCardWidget(
+                              mainPrice: item.price==null ? "" : item.price.toString(),
+                              image: item.featuredImage![0].image ?? "",
+                              price:
+                                  "${item.price ?? 0 - int.parse(item.discount ?? "")}",
+                              slug: item.slug ?? "",
+                              thcRange: item.thcRange ?? "",
+                              titileText: item.name ?? "",
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProductWishListScreen()));
+                              },
+                            );
+                          },
+                        )
+                      : const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        ),
                 ),
               ],
             ),
@@ -488,31 +503,36 @@ class _DashboardScreen extends State<DashboardScreen> {
                 ),
                 SizedBox(
                   height: 276,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: featuresProductList.length,
-                    itemBuilder: (context, index) {
-                      var item = featuresProductList[index];
-                      return CustomConcentrateCardWidget(
-                        mainPrice: item.price.toString(),
-                        price: "${item.price - int.parse(item.discount)}",
-                        slug: item.slug,
-                        thcRange: item.thcRange,
-                        titileText: item.name,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                       const ProductWishListScreen()));
-                        },
-                      );
-                    },
-                  ),
+                  child: featureList.isNotEmpty
+                      ? ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: featureList.length,
+                          itemBuilder: (context, index) {
+                            var item = featureList[index];
+                            return CustomConcentrateCardWidget(
+                              image: item.featuredImage![0].image ?? "",
+                              mainPrice: item.price == null ?"": item.price.toString(),
+                              price:
+                                  "${item.price ?? 0 - int.parse(item.discount ?? "")}",
+                              slug: item.slug ?? "",
+                              thcRange: item.thcRange ?? "",
+                              titileText: item.name ?? "",
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProductWishListScreen()));
+                              },
+                            );
+                          },
+                        )
+                      : const CircularProgressIndicator.adaptive(),
                 ),
               ],
             ),
           ),
+
           Container(
             height: _screenHeight * 0.2,
             margin: const EdgeInsets.all(12),
@@ -575,7 +595,7 @@ class _DashboardScreen extends State<DashboardScreen> {
             ),
           ),
 
-          //  boxes card design
+         //  boxes card design
           Container(
             height: _screenHeight * 0.45,
             margin: const EdgeInsets.all(12),
@@ -606,27 +626,31 @@ class _DashboardScreen extends State<DashboardScreen> {
                 ),
                 SizedBox(
                   height: 280,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: featuresProductList.length,
-                    itemBuilder: (context, index) {
-                      var item = featuresProductList[index];
-                      return CustomConcentrateCardWidget(
-                        mainPrice: item.price.toString(),
-                        price: "${item.price - int.parse(item.discount)}",
-                        slug: item.slug,
-                        thcRange: item.thcRange,
-                        titileText: item.name,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                       const ProductWishListScreen()));
-                        },
-                      );
-                    },
-                  ),
+                  child: featureList.isNotEmpty
+                      ? ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: featureList.length,
+                          itemBuilder: (context, index) {
+                            var item = featureList[index];
+                            return CustomConcentrateCardWidget(
+                              image: item.featuredImage![0].image ?? "",
+                              mainPrice: item.price == null ? "" : item.price.toString(),
+                              price:
+                                  "${item.price ?? 0 - int.parse(item.discount ?? "")}",
+                              slug: item.slug ?? "",
+                              thcRange: item.thcRange ?? "",
+                              titileText: item.name ?? "",
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProductWishListScreen()));
+                              },
+                            );
+                          },
+                        )
+                      : const CircularProgressIndicator.adaptive(),
                 )
               ],
             ),
@@ -667,27 +691,31 @@ class _DashboardScreen extends State<DashboardScreen> {
                 ),
                 SizedBox(
                   height: 276,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: featuresProductList.length,
-                    itemBuilder: (context, index) {
-                      var item = featuresProductList[index];
-                      return CustomConcentrateCardWidget(
-                        mainPrice: item.price.toString(),
-                        price: "${item.price - int.parse(item.discount)}",
-                        slug: item.slug,
-                        thcRange: item.thcRange,
-                        titileText: item.name,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                       const ProductWishListScreen()));
-                        },
-                      );
-                    },
-                  ),
+                  child: featureList.isNotEmpty
+                      ? ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: featureList.length,
+                          itemBuilder: (context, index) {
+                            var item = featureList[index];
+                            return CustomConcentrateCardWidget(
+                              image: item.featuredImage![0].image ?? "",
+                              mainPrice: item.price == null ? "": item.price.toString(),
+                              price:
+                                  "${item.price ?? 0 - int.parse(item.discount ?? '')}",
+                              slug: item.slug ?? "",
+                              thcRange: item.thcRange ?? '',
+                              titileText: item.name ?? '',
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProductWishListScreen()));
+                              },
+                            );
+                          },
+                        )
+                      : const CircularProgressIndicator.adaptive(),
                 )
               ],
             ),
@@ -724,31 +752,36 @@ class _DashboardScreen extends State<DashboardScreen> {
                 ),
                 SizedBox(
                   height: 276,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: featuresProductList.length,
-                    itemBuilder: (context, index) {
-                      var item = featuresProductList[index];
-                      return CustomConcentrateCardWidget(
-                        mainPrice: item.price.toString(),
-                        price: "${item.price - int.parse(item.discount)}",
-                        slug: item.slug,
-                        thcRange: item.thcRange,
-                        titileText: item.name,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                       const ProductWishListScreen()));
-                        },
-                      );
-                    },
-                  ),
+                  child: featureList.isNotEmpty
+                      ? ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: featureList.length,
+                          itemBuilder: (context, index) {
+                            var item =featureList[index];
+                            return CustomConcentrateCardWidget(
+                              image: item.featuredImage![0].image ?? "",
+                              mainPrice: item.price == null ? "": item.price.toString(),
+                              price:
+                                  "${item.price ?? 0 - int.parse(item.discount ?? "")}",
+                              slug: item.slug ?? "",
+                              thcRange: item.thcRange ?? "",
+                              titileText: item.name ?? "",
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProductWishListScreen()));
+                              },
+                            );
+                          },
+                        )
+                      : const CircularProgressIndicator.adaptive(),
                 )
               ],
             ),
           ),
+
           Container(
             height: _screenHeight * 0.2,
             margin: const EdgeInsets.all(12),
@@ -840,31 +873,36 @@ class _DashboardScreen extends State<DashboardScreen> {
                 ),
                 SizedBox(
                   height: 276,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: featuresProductList.length,
-                    itemBuilder: (context, index) {
-                      var item = featuresProductList[index];
-                      return CustomConcentrateCardWidget(
-                        mainPrice: item.price.toString(),
-                        price: "${item.price - int.parse(item.discount)}",
-                        slug: item.slug,
-                        thcRange: item.thcRange,
-                        titileText: item.name,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                       const ProductWishListScreen()));
-                        },
-                      );
-                    },
-                  ),
+                  child: featureList.isNotEmpty
+                      ? ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: featuredProducts.data!.length,
+                          itemBuilder: (context, index) {
+                            var item = featuredProducts.data![index];
+                            return CustomConcentrateCardWidget(
+                              image: item.featuredImage![0].image ?? "",
+                              mainPrice: item.price==null ? "" : item.price.toString(),
+                              price:
+                                  "${item.price ?? 0 - int.parse(item.discount ?? "")}",
+                              slug: item.slug ?? '',
+                              thcRange: item.thcRange ?? '',
+                              titileText: item.name ?? "",
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProductWishListScreen()));
+                              },
+                            );
+                          },
+                        )
+                      : const CircularProgressIndicator.adaptive(),
                 )
               ],
             ),
           ),
+
         ],
       ),
     );

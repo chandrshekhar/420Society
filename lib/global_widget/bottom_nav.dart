@@ -20,8 +20,9 @@ class _HomePageWithBottomBarState extends State<HomePageWithBottomBar> {
     const DashboardScreen(),
     const ProductCategoryScreen(),
     const CardScreen(),
-     ProductWishListScreen(),
+    const ProductWishListScreen(),
     const UserProfileScreen(),
+
   ];
   @override
   Widget build(BuildContext context) {

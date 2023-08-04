@@ -5,8 +5,8 @@ class AboutUsModel {
   Data? data;
   String? errorMsg;
 
-  AboutUsModel(
-      {this.status, this.message, this.statusCode, this.data, this.errorMsg});
+
+  AboutUsModel({this.status, this.message, this.statusCode, this.data, this.errorMsg});
 
   AboutUsModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
@@ -36,18 +36,18 @@ class Data {
 
   Data(
       {this.id,
-      this.title,
-      this.bannerImg,
-      this.section1Name,
-      this.section1Title,
-      this.section1Description,
-      this.section1Img,
-      this.section2Title,
-      this.section2Name,
-      this.section2Description,
-      this.section2Img,
-      this.createdAt,
-      this.updatedAt});
+        this.title,
+        this.bannerImg,
+        this.section1Name,
+        this.section1Title,
+        this.section1Description,
+        this.section1Img,
+        this.section2Title,
+        this.section2Name,
+        this.section2Description,
+        this.section2Img,
+        this.createdAt,
+        this.updatedAt});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];

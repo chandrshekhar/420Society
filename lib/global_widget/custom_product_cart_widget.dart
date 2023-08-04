@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:four20society/utils/Api/api_calling/api_provider.dart';
+import '../constants/apis_path/api_config_string.dart';
 import 'custom_bordered_button.dart';
 import 'custom_unbordered_button.dart';
 
@@ -12,6 +14,8 @@ class CustomProductCardWidget extends StatefulWidget {
   final String slug;
   final String description;
   final String thcRange;
+  final String image;
+
   final VoidCallback onTap;
   const CustomProductCardWidget(
       {super.key,
@@ -21,7 +25,9 @@ class CustomProductCardWidget extends StatefulWidget {
       required this.slug,
       required this.titileText,
       required this.description,
-      required this.thcRange, required this.onTap});
+      required this.image,
+      required this.thcRange,
+      required this.onTap});
 
   @override
   State<CustomProductCardWidget> createState() =>
@@ -46,9 +52,17 @@ class _CustomProductCardWidgetState extends State<CustomProductCardWidget> {
                 color: Colors.transparent,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Image.network(
-                "https://excellis.co.in/420-society-world/frontend_assets/images/canabi.png",
-                fit: BoxFit.fill,
+              // child: Image.network(
+              //   "https://excellis.co.in/420-society-world/frontend_assets/images/canabi.png",
+              //   fit: BoxFit.fill,
+              // ),
+              child: CachedNetworkImage(
+                 imageUrl: "${ApiEndPoints.Storage}${widget.image}",
+                width: double.infinity,
+                placeholder: (context, url) =>
+                const Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                fit: BoxFit.cover,
               ),
             ),
             const SizedBox(width: 15),
@@ -93,7 +107,6 @@ class _CustomProductCardWidgetState extends State<CustomProductCardWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomUnBorderedElevatedButton(
-
               onTap: widget.onTap,
               title: 'Add To Cart',
             ),
@@ -161,10 +174,3 @@ class _CustomProductCardWidgetState extends State<CustomProductCardWidget> {
 // ),
 // ),
 // ]),
-
-
-
-
-
-
-

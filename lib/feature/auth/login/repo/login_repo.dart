@@ -9,8 +9,8 @@ import '../model/login_model.dart';
 class LoginRepository{
   final apiProvider = ApiProvider();
   UserLoginModel userLoginModel = UserLoginModel();
-  Future<dynamic> getLogin(Map<String,dynamic> reqModel){
-    return apiProvider.dataProcessor(reqModel, userLoginModel,ApiEndPoints.login);
+  Future<dynamic> getLogin(Map<String,dynamic> reqModel)async{
+    return await apiProvider.dataProcessor(reqModel, userLoginModel,ApiEndPoints.login);
   }
 }
 class NetworkError extends Error {}

@@ -2,7 +2,6 @@ class ProfileModel {
   String? message;
   Date? date;
   String? errorMsg;
-
   ProfileModel({this.message, this.date, this.errorMsg});
 
   ProfileModel.fromJson(Map<String, dynamic> json) {
